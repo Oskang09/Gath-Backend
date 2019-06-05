@@ -31,42 +31,6 @@ sequelize.authenticate().then(
         app.listen(process.env.PORT || 3000).on('listening', () => 
             console.log(`Feathers server listening on localhost:${process.env.PORT || 3000}`)
         );
-
-        // app.service('order').patch(0, {}, {
-        //     action: {
-        //         type: 'TOTAL_PAX',
-        //         day: 3
-        //     },
-        // }).then(console.log);
-        
-        // app.service('account').patch(0, {}, {
-        //     action: {
-        //         type: 'ADMIN_ACCOUNT',
-        //         email: 'admin@ordopos.com',
-        //         username: 'kelvin',
-        //         password: 'kelvin',
-        //     }
-        // });
-        
-        // app.service('account').patch(0, {}, {
-        //     action: {
-        //         type: 'MERCHANT_ACCOUNT',
-        //         email: 'kelvindevtest@ordopos.com',
-        //         username: 'kelvin',
-        //         password: 'kelvin',
-        //     }
-        // }).then(console.log);
-        
-        // app.service('account').patch(0, {}, {
-        //     action: {
-        //         type: 'STORE_ACCOUNT',
-        //         email: 'store@ordopos.com',
-        //         username: 'store',
-        //         password: 'store',
-        //         merchantId: 1,
-        //         storeId: 1,
-        //     }
-        // }).then(console.log);
     },
     (error) => {
         console.log(`Database connection rejected due to : ` + error);
