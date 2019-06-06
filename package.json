@@ -13,7 +13,6 @@
     "@feathers-plus/batch-loader": "^0.3.6",
     "@feathersjs/authentication": "^2.1.16",
     "@feathersjs/authentication-jwt": "^2.0.10",
-    "@feathersjs/authentication-local": "^1.2.9",
     "@feathersjs/express": "^1.3.1",
     "@feathersjs/feathers": "^3.3.1",
     "@feathersjs/socketio": "^3.2.9",

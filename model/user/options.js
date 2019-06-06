@@ -13,11 +13,23 @@ module.exports = {
         /**
          * @param {Object} [action] Action payload
          * @param {String} [action.type] Action type ( should same with key )
-         * @param {String} [action.uid] Firebase UserId
+         * @param {String} [action.phone]
+         * @param {String} [action.email]
+         * @param {String} [action.password]
+         * @param {String} [action.name]
          */
         USER_SIGNUP: async (context, action) => {
+            const { auth } = context.app.get('services').firebase;
+            const user = await auth.createUser({
+                email: action.email,
+                phoneNumber: action.phone,
+                password: action.password,
+                displayName: action.name,
+                emailVerified: false,
+                disabled: false,
+            });
             const newUser = await context.service.create({
-                uid: action.uid,
+                uid: user.uid,
                 status: true,
             });
             context.result = newUser;

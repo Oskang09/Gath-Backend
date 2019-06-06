@@ -2,7 +2,7 @@ const Feathers          = require('@feathersjs/feathers');
 const SocketIO          = require('@feathersjs/socketio');
 const Express           = require('@feathersjs/express');
 const Authentication    = require('@feathersjs/authentication');
-const LocalAuth         = require('@feathersjs/authentication-local');
+const CustomAuth        = require('feathers-authentication-custom');
 const JWTAuth           = require('@feathersjs/authentication-jwt');
 const authConfig        = require('@config/auth');
 const i18nConfig        = require('@config/i18n');
@@ -42,7 +42,7 @@ app.hooks({
 
 app.configure(Authentication(authConfig.default));
 app.configure(JWTAuth(authConfig.jwt));
-app.configure(LocalAuth(authConfig.local));
+app.configure(CustomAuth(authConfig.custom));
 
 app.service('authentication').hooks({
     before: {
@@ -54,8 +54,9 @@ app.service('authentication').hooks({
             async (context) => {
                 context.result = {
                     ...context.result,
-                    user: context.params.user,
+                    user: context.params.user.user,
                 };
+                return context;
             }
         ]
     }

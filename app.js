@@ -11,13 +11,14 @@ app.set('services', {
     sequelize,
     validator: validator.instance,
     schema: validator.schema,
-    bucket: firebase.bucket,
+    firebase: firebase,
     mailer,
 });
 
 app.hooks({
     error: (context) => {
         console.log(context.error);
+        console.log(context.data);
     }
 });
 
