@@ -62,16 +62,4 @@ app.service('authentication').hooks({
     }
 });
 
-// app.on('login', (payload, { connection }) => {
-
-// });
-
-// app.on('logout',
-//     (payload, { connection }) => {
-
-//     }
-// );
-
-// app.publish(() => app.channel('authenticated'));
-
 module.exports = app;

@@ -1,10 +1,8 @@
 const mailer      = require('nodemailer');
+const config      = require('@config/mailer');
 const instance = mailer.createTransport({
     service: 'gmail',
-    auth: {
-        user: 'gathfyp2019@gmail.com',
-        pass: '@Gathfyp2019!'
-    }
+    auth: config
 });
 
 module.exports = instance;

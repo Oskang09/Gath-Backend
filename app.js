@@ -6,6 +6,7 @@ const sequelize   = require('@register/sequelize');
 const validator   = require('@register/validator');
 const firebase    = require('@register/firebase');
 const mailer      = require('@register/mailer');
+const gmaps       = require('@register/google-maps');
 
 app.set('services', {
     sequelize,
@@ -13,6 +14,7 @@ app.set('services', {
     schema: validator.schema,
     firebase: firebase,
     mailer,
+    gmaps
 });
 
 app.hooks({
