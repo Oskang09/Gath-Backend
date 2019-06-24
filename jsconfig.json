@@ -5,30 +5,12 @@
         "allowSyntheticDefaultImports": true,
         "baseUrl": "./",
         "paths": {
+            "@plugin/*": [
+                "./plugin/*"
+            ],
             "@config/*": [
                 "./config/*"
-            ],
-            "@register/*": [
-                "./tasks/*"
-            ],
-            "@actions/*": [
-                "./util/actions/*"
-            ],
-            "@batch/*": [
-                "./util/batch/*"
-            ],
-            "@hooks": [
-                "./util/hook"
-            ],
-            "@checkers": [
-                "./util/boolean"
-            ],
-            "@getters": [
-                "./util/getter"
-            ],
-            "@utils": [
-                "./util/utility"
-            ],
+            ]
         }
     }
 }

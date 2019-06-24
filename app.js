@@ -1,42 +1,52 @@
 require('module-alias/register');
-const glob        = require('glob');
 
-const app         = require('@register/feathersjs');
-const sequelize   = require('@register/sequelize');
-const validator   = require('@register/validator');
-const firebase    = require('@register/firebase');
-const mailer      = require('@register/mailer');
-const gmaps       = require('@register/google-maps');
+const Fastify    = require('fastify');
+const Helmet     = require('fastify-helmet');
+const Cors       = require('fastify-cors');
+const Firebase   = require('@plugin/firebase');
+const Gmaps      = require('@plugin/gmaps');
+const Mailer     = require('@plugin/mailer');
+const Sequelize  = require('@plugin/sequelize');
+const RouteAPI   = require('@plugin/route-api');
+const Helper     = require('@plugin/helpers');
+const config     = require('@config/setting');
 
-app.set('services', {
-    sequelize,
-    validator: validator.instance,
-    schema: validator.schema,
-    firebase: firebase,
-    mailer,
-    gmaps
+const fastify = Fastify();
+
+fastify.decorateReply('json', function(result, message, status = 200) {
+    this.type('application/json');
+    this.code(status);
+    this.send({
+        ok: true,
+        message,
+        result,
+    });
 });
 
-app.hooks({
-    error: (context) => {
-        console.log(context.error);
-        console.log(context.data);
-    }
+fastify.decorateReply('error', function(message, error, status = 400) {
+    this.type('application/json');
+    this.code(status);
+    this.send({
+        ok: false,
+        message,
+        error,
+    });
 });
 
-sequelize.authenticate().then(
-    () => {
-        for (const module of glob.sync('./services/**/*.js', { cwd: __dirname })) {
-            const service = require(module);
-            service(app); 
+fastify
+    .register(Helmet, { hidePoweredBy: { setTo: 'Gath 0.0.1' } })
+    .register(Cors, { origin: true })
+    .register(Firebase, config.firebase)
+    .register(Gmaps, config.gmaps)
+    .register(Mailer, config.gmail)
+    .register(Sequelize, config.sequelize)
+    .register(RouteAPI)
+    .register(Helper)
+    .listen(process.env.PORT || 3000, '0.0.0.0', (err) => {
+        if (err) {
+            console.error(err);
+            process.exit(1);
         }
-        
-        app.listen(process.env.PORT || 3000).on('listening', () => 
-            console.log(`Feathers server listening on localhost:${process.env.PORT || 3000}`)
-        );
-    },
-    (error) => {
-        console.log(`Database connection rejected due to : ` + error);
-        process.exit(1);
-    }
-);
+        console.log(fastify.printRoutes());
+        console.info(`[Fastify] Server listening on %o:%o`, fastify.server.address().address, fastify.server.address().port);
+    });
