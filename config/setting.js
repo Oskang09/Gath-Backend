@@ -1,6 +1,9 @@
 module.exports = {
     gmaps: {
-        key: process.env.GMAP_APIKEY,
+        key: process.env.GMAP_APIKEY || 'AIzaSyDjXpbeZw432ERe2Am-ord3WejkSYcrkdQ',
+        rate: {
+            limit: 10,
+        },
         Promise: Promise,
     },
     sequelize: {
