@@ -2,7 +2,7 @@ const attributes = require('./attributes');
 const options = require('./options');
 
 module.exports = {
-    name: 'user',
+    name: 'event_user',
     attributes,
     options,
 };

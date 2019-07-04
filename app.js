@@ -14,6 +14,7 @@ const config     = require('@config/setting');
 
 const fastify = Fastify();
 fastify
+    .decorateRequest('user', null)
     .decorateReply('error', function(message, error, status = 400) {
         this.type('application/json');
         this.code(status);
@@ -40,7 +41,7 @@ fastify
     .register(Plugin(Sequelize), config.sequelize)
     .register(Plugin(RouteAPI))
     .register(Plugin(Helper))
-    .listen(process.env.PORT || 3000, '0.0.0.0', (err) => {
+    .listen(process.env.PORT || 3001, '0.0.0.0', (err) => {
         if (err) {
             console.error(err);
             process.exit(1);

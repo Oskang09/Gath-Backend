@@ -5,6 +5,8 @@ module.exports = {
         type: Sequelize.STRING,
         primaryKey: true,
     },
+    role: Sequelize.STRING,
+    utag: Sequelize.STRING,
     phone: Sequelize.STRING,
     avatar: Sequelize.STRING,
     
@@ -15,6 +17,7 @@ module.exports = {
     desc: Sequelize.STRING,
     personality: Sequelize.ARRAY(Sequelize.STRING),
     badge: Sequelize.JSONB,
+    status: Sequelize.STRING,
 
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,

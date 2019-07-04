@@ -4,10 +4,11 @@ module.exports = {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
     },
-    organizerId: Sequelize.STRING,
-    name: Sequelize.STRING,
-    description: Sequelize.STRING,
     banner: Sequelize.STRING,
+    start_date: Sequelize.STRING,
+    end_date: Sequelize.STRING,
+    desc: Sequelize.STRING,
+    type: Sequelize.STRING,
+    shopId: Sequelize.INTEGER,
 };

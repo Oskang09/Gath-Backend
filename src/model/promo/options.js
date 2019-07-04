@@ -1,5 +1,5 @@
 module.exports = {
     timestamps: true,
     freezeTableName: true,
-    tableName: 'users',
+    tableName: 'promos',
 };
