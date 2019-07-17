@@ -1,0 +1,11 @@
+const React       = require('react');
+
+class Component extends React.Component {
+    render() {
+        return (
+            <p>{JSON.stringify(this.props)}</p>
+        );
+    }
+};
+
+module.exports = Component;
