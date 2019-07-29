@@ -25,10 +25,12 @@ module.exports = {
 
                 }
             ],
-            badge: [
-                {
-                    
-                }
+            badges: [
+                'cat-lover',
+                'good-choice',
+                'hakka-boi',
+                'pro-gamer',
+                'tool-man'
             ]
         };
     }

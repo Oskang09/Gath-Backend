@@ -1,19 +1,21 @@
 module.exports = {
     name: 'verifyToken',
-    handler: ({ mustHaveToken = true }) => {
-        return async function(ctx) {
+    handler: function ({ mustHaveToken = true }) {
+        const { sequelizeModels, auth } = this;
+        return async function(ctx, next) {
             const token = ctx.get('gath-token');
+            const { user, admin } = sequelizeModels;
             if (token) {
                 try {
-                    ctx.state.firebaseUser = await this.auth.verifyIdToken(token);
-                    ctx.state.user = await this.sequelizeModels.user.findOne({ 
-                        where: { uid: token },
+                    ctx.state.firebaseUser = await auth.verifyIdToken(token);
+                    ctx.state.user = await user.findOne({ 
+                        where: { uid: ctx.state.firebaseUser.uid },
                         limit: 1,
                         raw: true,
                     });
                 } catch (error) {
                     try {
-                        ctx.state.user = await this.sequelizeModels.admin.findOne({ 
+                        ctx.state.user = await admin.findOne({ 
                             where: { token },
                             limit: 1,
                             raw: true,
@@ -24,10 +26,11 @@ module.exports = {
                     }
                 }
             }
-    
+            
             if (!ctx.state.firebaseUser && mustHaveToken) {
                 throw "MISSING_HEADER_TOKEN";
             }
+            return next();
         };
     }
 }

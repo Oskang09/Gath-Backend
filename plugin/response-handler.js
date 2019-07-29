@@ -9,6 +9,7 @@ module.exports = function (setting, globalScope) {
                 return ctx.render('404');
             }
         } catch (error) {
+            console.info(error);
             const errorSetting = setting[error];
             if (errorSetting) {
                 let errorMessage;

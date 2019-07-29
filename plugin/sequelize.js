@@ -20,6 +20,6 @@ module.exports = function (setting, globalScope) {
     }
 
     globalScope.sequelize = sequelize;
-    globalScope.sequelizeModel = models;    
+    globalScope.sequelizeModels = models;    
     sequelize.sync();
 };

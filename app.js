@@ -3,6 +3,7 @@ const Router      = require('koa-router');
 const Helmet      = require('koa-helmet');
 const BodyParser  = require('koa-bodyparser');
 const ReactEngine = require('koa-views');
+const Static      = require('koa-static');
 
 const RouteAPI    = require('./plugin/route-api');
 const Response    = require('./plugin/response-handler');
@@ -20,7 +21,7 @@ const globalScope = {
     bucket: null,
     cdn: null,
     sequelize: null,
-    sequelizeModel: null,
+    sequelizeModels: null,
 };
 
 const app = new Koa();
@@ -33,7 +34,8 @@ RouteAPI(router, globalScope);
 Helper(globalScope);
 ReactView(webRouter, globalScope);
 
-app.use(ReactEngine(__dirname + "/src/views", { extension: 'react' }))
+app.use(Static('assets/'))
+    .use(ReactEngine(__dirname + "/src/views", { extension: 'react' }))
     .use(Response(setting.messages, globalScope))
     .use(Helmet(setting.helmet))
     .use(BodyParser(setting.bodyparser))
@@ -41,4 +43,4 @@ app.use(ReactEngine(__dirname + "/src/views", { extension: 'react' }))
     .use(router.allowedMethods())
     .use(webRouter.routes())
     .use(webRouter.allowedMethods())
-    .listen(1234, () => console.log(`PORT : ${1234}`));
+    .listen(3000, () => console.log(`PORT : ${3000}`));

@@ -5,14 +5,13 @@ module.exports = function (router, globalScope) {
     const middleware = {};
     for (const mw of Glob.sync('../src/middleware/**/*.js', { cwd: __dirname })) {
         const module = require(mw);
-        middleware[module.name] = module.handler;
+        middleware[module.name] = module.handler.bind(globalScope);
     }
 
     for (const api of Glob.sync('../src/api/**/*.js', { cwd: __dirname })) {
         const module = require(api);
         const accessFlow = [];
         const schema = Joi.object().keys(module.schema || {});
-
         module.handler = module.handler.bind(globalScope);
     
         if (module.path.api) {
@@ -21,7 +20,7 @@ module.exports = function (router, globalScope) {
                     if (typeof before === 'string') {
                         accessFlow.push(middleware[before]({}));
                     } else if (typeof before === 'object') {
-                        accessFlow.push(middleware[before.name](before.params));
+                        accessFlow.push(middleware[before.middleware](before.params));
                     } else if (typeof before === 'function') {
                         accessFlow.push(before);
                     }
@@ -37,7 +36,11 @@ module.exports = function (router, globalScope) {
                             throw "JOI_VALIDATE_ERROR";
                         }
                     }
-                    ctx.body = await module.handler(params, ctx);
+                    
+                    ctx.body = {
+                        ok: true,
+                        result: await module.handler(params, ctx)
+                    };
                     return next();
                 }
             );
@@ -47,7 +50,7 @@ module.exports = function (router, globalScope) {
                     if (typeof after === 'string') {
                         accessFlow.push(middleware[after]({}));
                     } else if (typeof after === 'object') {
-                        accessFlow.push(middleware[after.name](after.params));
+                        accessFlow.push(middleware[after.middleware](after.params));
                     } else if (typeof after === 'function') {
                         accessFlow.push(after);
                     }
