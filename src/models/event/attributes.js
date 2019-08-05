@@ -7,17 +7,14 @@ module.exports = {
         autoIncrement: true,
     },
     organizerId: Sequelize.INTEGER,
+    shopId: Sequelize.INTEGER,
     
     name: Sequelize.STRING,
     desc: Sequelize.STRING,
-    banner: Sequelize.STRING,
 
     start_time: Sequelize.STRING,
-    end_time: Sequelize.STRING,
-
+    type: Sequelize.STRING,
+    tags: Sequelize.STRING,
     location: Sequelize.STRING,
-    contact: Sequelize.JSONB,
-    category: Sequelize.ARRAY(Sequelize.STRING),
-    hashtag: Sequelize.ARRAY(Sequelize.STRING),
     status: Sequelize.STRING,
 };

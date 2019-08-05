@@ -22,7 +22,52 @@ module.exports = {
             ],
             personality: [
                 {
-
+                    display: 'Listener',
+                    icon: '',
+                },
+                {
+                    display: 'Life Adviser',
+                    icon: '',
+                },
+                {
+                    display: 'Gamer',
+                    icon: '',
+                },
+                {
+                    display: 'K-Pop',
+                    icon: '',
+                },
+                {
+                    display: 'Business',
+                    icon: '',
+                },
+                {
+                    display: 'Anime',
+                    icon: '',
+                },
+                {
+                    display: 'Outdoor',
+                    icon: '',
+                },
+                {
+                    display: 'Sport',
+                    icon: '',
+                },
+                {
+                    display: 'Technology',
+                    icon: '',
+                },
+                {
+                    display: 'Musician',
+                    icon: '',
+                },
+                {
+                    display: 'Board Gamer',
+                    icon: '',
+                },
+                {
+                    display: 'Pet Lover',
+                    icon: '',
                 }
             ],
             badges: [

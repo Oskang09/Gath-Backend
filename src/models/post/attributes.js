@@ -5,10 +5,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
     },
-    banner: Sequelize.STRING,
-    start_date: Sequelize.STRING,
-    end_date: Sequelize.STRING,
-    desc: Sequelize.STRING,
-    type: Sequelize.STRING,
+    title: Sequelize.STRING,
+    content: Sequelize.TEXT,
     shopId: Sequelize.INTEGER,
 };

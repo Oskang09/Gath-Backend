@@ -1,7 +1,9 @@
 module.exports = ({
     shop,
-    post
+    post,
+    event
 }) =>
 {
+    shop.hasMany(event, { foreignKey: 'shopId' });
     shop.hasMany(post, { foreignKey: 'shopId' });
 };

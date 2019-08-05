@@ -5,14 +5,6 @@ module.exports = {
     },
     method: 'POST',
     before: [ 'verifyToken' ],
-    after: [
-        {
-            middleware: 'parseImage',
-            params: {
-                fields: [ 'avatar' ]
-            }
-        }
-    ],
     handler: async function(params, ctx) {
         const { user } = this.sequelizeModels;
         const instance = await user.findByPk(ctx.state.user.id);
@@ -25,11 +17,7 @@ module.exports = {
         }
 
         if (params.avatar) {
-            try {
-                params.avatar = await this.cdn.upload(params.avatar, ctx.state.user.uid);
-            } catch (error) {
-                delete params.avatar;
-            }
+            await this.cdn.upload(params.avatar, `users-${ctx.state.user.id}`);
         }
 
         const updated = await instance.update(params);

@@ -5,14 +5,6 @@ module.exports = {
     },
     method: 'GET',
     before: [ 'verifyToken' ],
-    after: [
-        {
-            middleware: 'parseImage',
-            params: {
-                fields: [ 'avatar' ]
-            }
-        }
-    ],
     handler: async function(params, ctx) {
         const { user } = this.sequelizeModels;
         const instance = await user.findByPk(ctx.state.user.id, { raw: true });

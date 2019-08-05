@@ -1,11 +1,13 @@
 module.exports = {
     path: {
-        api: '/users/profile',
-        internal: 'userProfile',
+        api: '/events',
+        internal: 'getEvents',
     },
     method: 'GET',
     before: [ 'verifyToken' ],
     handler: async function(params) {
-        
+        const { event } = this.sequelizeModels;
+        const result = await event.findAll();
+        return result;
     },
 };
