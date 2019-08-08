@@ -36,10 +36,41 @@ module.exports = function (router, globalScope) {
                             throw "JOI_VALIDATE_ERROR";
                         }
                     }
-                    
+                    const response = {};
+                    const result = await module.handler(params, ctx);
+                    if (result.pagination) {
+                        const { page, count, limit } = result.pagination;
+                        const pageCount = Math.ceil(count / limit);
+                        const queries = Object.keys(ctx.query);
+                        response['_meta'] = {
+                            currentPage: page,
+                            totalCount: count,
+                            perPage: limit,
+                            pageCount,
+                        };
+
+                        const path = ctx.request.path;
+                        const queryString = queries.map(
+                            (query) => {
+                                if (query === 'page' || query === 'limit') return;
+                                return `${query}=${ctx.query[query]}`
+                            }
+                        );
+                        const buildQS = (pageNumber) => `${path}?${queryString.join('&')}&page=${pageNumber}&limit=${limit}`;
+                        response['_paginate'] = {
+                            first: buildQS(1),
+                            prev: page > 1 ? buildQS(page - 1) : buildQS(1),
+                            self: buildQS(page),
+                            next: page <= pageCount ? buildQS(page + 1) : buildQS(page),
+                            last: buildQS(pageCount),
+                        };
+                        response.result = result.result;
+                    } else {
+                        response.result = result;
+                    }
                     ctx.body = {
                         ok: true,
-                        result: await module.handler(params, ctx)
+                        ...response
                     };
                     return next();
                 }

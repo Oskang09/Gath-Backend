@@ -20,56 +20,52 @@ module.exports = {
                 'Aquarius',
                 'Pisces'
             ],
-            personality: [
-                {
-                    display: 'Listener',
-                    icon: '',
+            personality: {
+                Listening: {
+                    package: 'MaterialIcons',
+                    icon: 'hearing',
                 },
-                {
-                    display: 'Life Adviser',
-                    icon: '',
+                'Life Advising': {
+                    package: 'Entypo',
+                    icon: 'flag',
                 },
-                {
-                    display: 'Gamer',
-                    icon: '',
+                Gaming: {
+                    package: 'FontAwesome',
+                    icon: 'gamepad',
                 },
-                {
-                    display: 'K-Pop',
-                    icon: '',
+                Business: {
+                    package: 'MaterialCommunityIcons',
+                    icon: 'cash',
                 },
-                {
-                    display: 'Business',
-                    icon: '',
+                Outdoor: {
+                    package: 'Foundation',
+                    icon: 'foot',
                 },
-                {
-                    display: 'Anime',
-                    icon: '',
+                Sport: {
+                    package: 'FontAwesome',
+                    icon: 'soccer-ball-o',
                 },
-                {
-                    display: 'Outdoor',
-                    icon: '',
+                Technology: {
+                    package: 'Entypo',
+                    icon: 'tablet-mobile-combo',
                 },
-                {
-                    display: 'Sport',
-                    icon: '',
+                Music: {
+                    package: 'Ionicons',
+                    icon: 'ios-musical-notes',
                 },
-                {
-                    display: 'Technology',
-                    icon: '',
+                'Board Game': {
+                    package: 'FontAwesome5',
+                    icon: 'chess',
                 },
-                {
-                    display: 'Musician',
-                    icon: '',
+                'Pet Lover': {
+                    package: 'MaterialIcons',
+                    icon: 'pets',
                 },
-                {
-                    display: 'Board Gamer',
-                    icon: '',
-                },
-                {
-                    display: 'Pet Lover',
-                    icon: '',
+                'Coding': {
+                    package: 'Entypo',
+                    icon: 'code'
                 }
-            ],
+            },
             badges: [
                 'cat-lover',
                 'good-choice',

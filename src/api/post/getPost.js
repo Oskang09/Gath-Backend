@@ -6,8 +6,10 @@ module.exports = {
     method: 'GET',
     before: [ 'verifyToken' ],
     handler: async function(params) {
-        const { post } = this.sequelizeModels;
-        const instance = await post.findAll({ raw: true });
+        const { post, shop } = this.sequelizeModels;
+        const instance = await post.findAll({
+            include: [ shop ]
+        });
         return instance;
     },
 };

@@ -3,7 +3,10 @@ const React       = require('react');
 class Component extends React.Component {
     render() {
         return (
-            <p>{JSON.stringify(this.props)}</p>
+            <div>
+                <p>Create Shop</p>
+                <p>{JSON.stringify(this.props)}</p>
+            </div>
         );
     }
 };

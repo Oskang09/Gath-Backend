@@ -4,7 +4,7 @@ module.exports = {
         internal: 'getShops',
     },
     method: 'GET',
-    // before: [ 'verifyToken' ],
+    before: [ 'verifyToken' ],
     handler: async function() {
         const { shop } = this.sequelizeModels;
         const instance = await shop.findAll({ raw: true });

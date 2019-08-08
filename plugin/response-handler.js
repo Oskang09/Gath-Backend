@@ -19,12 +19,12 @@ module.exports = function (setting, globalScope) {
                     errorMessage = errorSetting(error);
                 }
                 ctx.body = {
-                    success: false,
+                    ok: false,
                     ...errorMessage
                 };
             } else {
                 ctx.body = {
-                    success: false,
+                    ok: false,
                     message: error
                 }
             }
