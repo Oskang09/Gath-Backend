@@ -4,7 +4,7 @@ module.exports = {
         const { sequelizeModels, auth } = this;
         return async function(ctx, next) {
             const token = ctx.get('gath-token');
-            const { user, admin } = sequelizeModels;
+            const { user } = sequelizeModels;
             if (token) {
                 try {
                     ctx.state.firebaseUser = await auth.verifyIdToken(token);
@@ -14,16 +14,7 @@ module.exports = {
                         raw: true,
                     });
                 } catch (error) {
-                    try {
-                        ctx.state.user = await admin.findOne({ 
-                            where: { token },
-                            limit: 1,
-                            raw: true,
-                        });
-                        ctx.state.isAdmin = true;
-                    } catch (error) {
-                        ctx.state.user = null;
-                    }
+                    ctx.state.user = null;
                 }
             }
             

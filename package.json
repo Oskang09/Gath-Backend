@@ -25,11 +25,13 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
+    "koa2-formidable": "^1.0.2",
     "moment": "^2.24.0",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "sequelize": "^5.10.1"
+    "sequelize": "^5.10.1",
+    "uuid": "^3.3.3"
   }
 }

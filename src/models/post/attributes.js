@@ -6,6 +6,5 @@ module.exports = {
         primaryKey: true,
     },
     title: Sequelize.STRING,
-    content: Sequelize.TEXT,
     shopId: Sequelize.INTEGER,
 };

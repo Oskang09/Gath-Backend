@@ -3,8 +3,10 @@ const Sequelize = require('sequelize');
 module.exports = {
     id: {
         type: Sequelize.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
     },
+    type: Sequelize.STRING,
     name: Sequelize.STRING,
     locate: Sequelize.STRING,
     operation_hours: {

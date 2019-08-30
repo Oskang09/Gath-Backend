@@ -29,7 +29,7 @@ module.exports = function (router, globalScope) {
 
             accessFlow.push(
                 async function (ctx, next) {
-                    const params = Object.assign({}, ctx.request.body, ctx.params.body, ctx.query);
+                    const params = Object.assign({}, ctx.request.body, ctx.params, ctx.query);
                     if (module.schema) {
                         const result = schema.validate(params);
                         if (result.error) {
@@ -91,14 +91,14 @@ module.exports = function (router, globalScope) {
         }
     
         if (module.path.internal) {
-            globalScope.api[module.path.internal] = function (params) {
+            globalScope.api[module.path.internal] = function (params, ctx = null, isForm = false) {
                 if (module.schema) {
                     const result = schema.validate(params);
                     if (result.error) {
                         throw "JOI_VALIDATE_ERROR";
                     }
                 }
-                return module.handler(params, null);
+                return module.handler(params, ctx, isForm);
             };
         }
     }

@@ -1,0 +1,59 @@
+const React       = require('react');
+
+const styles = {
+    sidebar: {
+        height: '100%',
+        position: 'fixed',
+        width: '250px',
+    },
+    container: {
+        marginLeft: '250px',
+        padding: '50px'
+    },
+    navigator: {
+        backgroundColor: '#eee',
+        color: 'black',
+        display: 'block',
+        padding: '12px',
+        textDecoration: 'none',
+    },
+    activatedNavigator: {
+        backgroundColor: '#4CAF50',
+        color: 'white'
+    }
+};
+
+function Link(props) {
+    return (
+        <a href={props.go} style={styles.navigator}>{props.title}</a>
+    );
+}
+
+function Component(props) {
+    const Content = require(`./${props.view}`);
+    return (
+        <html>
+            <head>
+                <title>{props.title || 'Gath Admin'}</title>
+            </head>
+            <body>
+                <div>
+                    <div style={styles.sidebar}>
+                        <Link go="/web/" title="Home" />
+                        <Link go="/web/create_shop" title="Create Shop" />
+                        {
+                            props.admin ? 
+                                <Link go="/web/logout" title="Logout" /> :
+                                <Link go="/web/login" title="Login" />
+                        }
+                    </div>
+                    <div style={styles.container}>
+                        <Content {...props} />
+                    </div>
+                </div>
+            </body>
+        </html>
+    );
+};
+
+module.exports = Component;

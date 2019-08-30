@@ -1,7 +1,7 @@
 module.exports = {
     path: {
-        api: '/posts',
-        internal: 'getPost',
+        api: '/events',
+        internal: 'findEvents',
     },
     method: 'GET',
     before: [ 'verifyToken' ],
@@ -10,11 +10,8 @@ module.exports = {
         const page = Number(params.page) || 1;
         const offset = ( page - 1 ) * limit;
 
-        const { post, shop } = this.sequelizeModels;
-        const { count, rows } = await post.findAndCountAll({
-            include: [ shop ],
-            limit, offset
-        });
+        const { event } = this.sequelizeModels;
+        const { count, rows } = await event.findAndCountAll({ limit, offset, raw: true });
         return {
             pagination: { page, count, limit },
             result: rows,

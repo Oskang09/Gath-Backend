@@ -14,14 +14,20 @@ module.exports = {
                     organizerId: ctx.state.user.id,
                     shopId: params[2].shop.id,
                     location: params[2].shop.locate,
-                    name: params[0].name,
                     desc: params[1],
+                    name: params[0].name,
                     start_time: params[0].start,
                     type: params[0].type,
-                    tags: params[0].tags,
                     status: 'PENDING',
                     public: true,
                     code: null,
+                    comments: [
+                        {
+                            comment: params[1],
+                            by: ctx.state.user.id,
+                            when: Date.now(),
+                        }
+                    ]
                 }, { transaction });
                 const bridge = await event_user.create({
                     eventId: result.id,

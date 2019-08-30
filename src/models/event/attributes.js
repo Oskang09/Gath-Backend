@@ -12,12 +12,15 @@ module.exports = {
     
     name: Sequelize.STRING,
     desc: Sequelize.STRING,
-
     start_time: Sequelize.STRING,
+    location: Sequelize.STRING,
+    status: Sequelize.STRING,
+    comments: {
+        type: Sequelize.JSONB,
+        defaultValue: [],
+    },
+
     type: Sequelize.STRING,
     code: Sequelize.STRING,
     public: Sequelize.BOOLEAN,
-    tags: Sequelize.STRING,
-    location: Sequelize.STRING,
-    status: Sequelize.STRING,
 };

@@ -1,0 +1,9 @@
+const React       = require('react');
+
+function Component(props) {
+    return (
+        <p>{props.error}</p>
+    );
+}
+
+module.exports = Component;

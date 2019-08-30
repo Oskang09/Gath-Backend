@@ -15,12 +15,11 @@ module.exports = {
             }
             params.badge = badges;
         }
-
+        
         if (params.avatar) {
-            await this.cdn.upload(params.avatar, `users-${ctx.state.user.id}`);
+            await this.cdn.upload(params.avatar, `user-${ctx.state.user.id}`);
         }
 
-        const updated = await instance.update(params);
         return updated;
     },
 };

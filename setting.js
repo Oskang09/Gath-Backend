@@ -28,12 +28,10 @@ module.exports = {
         }
     },
     bodyparser: {
-        enableTypes: 'json',
+        enableTypes: [ 'json', 'form' ],
         encoding: "utf8",
-        jsonLimit: "1mb",
-        onerror: () => {
-            throw 'INVALID_JSON_BODY';
-        },
+        multipart: true,
+        urlencoded: true,
     },
     messages: {
         INVALID_JSON_BODY: {

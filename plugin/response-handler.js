@@ -5,11 +5,7 @@ module.exports = function (setting, globalScope) {
         const start = moment();
         try {
             await next();
-            if (!ctx.body) {
-                return ctx.render('404');
-            }
         } catch (error) {
-            console.info(error);
             const errorSetting = setting[error];
             if (errorSetting) {
                 let errorMessage;
