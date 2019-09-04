@@ -7,11 +7,8 @@ module.exports = {
         autoIncrement: true,
     },
     title: Sequelize.STRING,
-    condition: Sequelize.ARRAY(Sequelize.STRING),
+    description: Sequelize.STRING,
     count: Sequelize.INTEGER,
     shopId: Sequelize.INTEGER,
-    createdAt: {
-        type: Sequelize.DATE,
-        defaultValue: Date.now(),
-    }
+    expiredAt: Sequelize.DATE,
 };

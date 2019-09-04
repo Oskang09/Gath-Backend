@@ -6,8 +6,13 @@ module.exports = {
     before: [ 'verifyToken' ],
     handler: async function (params) {
         const cdn = this.cdn;
-        const { shop } = this.sequelizeModels;
-        const instance = await shop.create({ title: params.title }, { raw: true });
+        const { post } = this.sequelizeModels;
+        const instance = await post.create({
+            title: params.title,
+            content: params.content,
+            type: params.type,
+            shopId: params.shop
+        }, { raw: true });
 
         if (params.image) {
             await cdn.upload(params.image, `post-${instance.id}`);

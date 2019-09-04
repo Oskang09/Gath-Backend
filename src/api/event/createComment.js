@@ -13,7 +13,7 @@ module.exports = {
             by: ctx.state.user.id,
             when: Date.now()
         });
-        await result.save();
+        await result.update({ comments: result.comments });
         return result;
     },
 };

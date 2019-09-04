@@ -1,4 +1,15 @@
 module.exports = {
+    helmet: {
+        hidePoweredBy: {
+            setTo: 'GATH 0.0.1'
+        }
+    },
+    bodyparser: {
+        enableTypes: [ 'json', 'form' ],
+        encoding: "utf8",
+        multipart: true,
+        urlencoded: true,
+    },
     sequelize: {
         url: 'postgresql://postgres:oskang09@127.0.0.1:5432/gath',
         options: {
@@ -21,17 +32,6 @@ module.exports = {
         token_uri: "https://oauth2.googleapis.com/token",
         auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
         client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-d4vi9%40gathfyp2019.iam.gserviceaccount.com"
-    },
-    helmet: {
-        hidePoweredBy: {
-            setTo: 'GATH 0.0.1'
-        }
-    },
-    bodyparser: {
-        enableTypes: [ 'json', 'form' ],
-        encoding: "utf8",
-        multipart: true,
-        urlencoded: true,
     },
     messages: {
         INVALID_JSON_BODY: {

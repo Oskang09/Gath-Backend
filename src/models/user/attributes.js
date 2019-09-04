@@ -10,7 +10,10 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
     },
-    utag: Sequelize.STRING,
+    utag: {
+        type: Sequelize.STRING,
+        unique: true,
+    },
     phone: Sequelize.STRING,
     
     name: Sequelize.STRING,

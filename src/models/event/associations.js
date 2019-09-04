@@ -3,10 +3,8 @@ module.exports = ({
     user,
     event_user,
     shop,
-    voucher,
 }) =>
 {
-    event.hasOne(voucher, { foreignKey: 'voucherId' });
     event.belongsTo(user, { foreignKey: 'organizerId' });
     event.belongsTo(shop, { foreignKey: 'shopId' });
     event.belongsToMany(user, {

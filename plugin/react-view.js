@@ -73,10 +73,18 @@ module.exports = function(router, globalScope) {
             params[key] = fs.readFileSync(file.path).toString('base64');
         }
 
-        const response = await globalScope.api[api](params, ctx, true);
-        if (!ctx.body) {
-            return render({ 
-                view, response, 
+        try {
+            const response = await globalScope.api[api](params, ctx, true);
+            if (!ctx.body) {
+                return render({ 
+                    view, response, 
+                    api: globalScope.api,
+                    admin: ctx.state.user,
+                }, ctx);
+            }
+        } catch (error) {
+            return render({
+                view, error,
                 api: globalScope.api,
                 admin: ctx.state.user,
             }, ctx);

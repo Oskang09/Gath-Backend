@@ -6,6 +6,7 @@ module.exports = function (setting, globalScope) {
         try {
             await next();
         } catch (error) {
+            console.log(error);
             const errorSetting = setting[error];
             if (errorSetting) {
                 let errorMessage;

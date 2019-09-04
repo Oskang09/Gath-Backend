@@ -15,16 +15,14 @@ module.exports = {
                     shopId: params[2].shop.id,
                     location: params[2].shop.locate,
                     desc: params[1],
+                    type: params[0].type,
                     name: params[0].name,
                     start_time: params[0].start,
-                    type: params[0].type,
                     status: 'PENDING',
-                    public: true,
-                    code: null,
                     comments: [
                         {
                             comment: params[1],
-                            by: ctx.state.user.id,
+                            by: ctx.state.user.name,
                             when: Date.now(),
                         }
                     ]
@@ -35,8 +33,8 @@ module.exports = {
                     status: 'OWNER',
                 }, { transaction });
                 
-                if (params.banner) {
-                    await this.cdn.upload(params.banner, `event-${result.id}`);
+                if (params[0].banner) {
+                    await this.cdn.upload(params[0].banner, `event-${result.id}`);
                 }
         
                 return { event: result, event_user: bridge };

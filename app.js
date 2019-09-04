@@ -1,9 +1,9 @@
 const Koa         = require('koa');
 const Router      = require('koa-router');
 const Helmet      = require('koa-helmet');
-const BodyParser  = require('koa-bodyparser');
 const ReactEngine = require('koa-views');
 const Static      = require('koa-static');
+const BodyParser  = require('koa-bodyparser');
 const Formidable  = require('koa2-formidable');
 
 const RouteAPI    = require('./plugin/route-api');
@@ -32,8 +32,8 @@ const webRouter = new Router();
 Firebase(setting.firebase, globalScope);
 Sequelize(setting.sequelize, globalScope);
 RouteAPI(router, globalScope);
-Helper(globalScope);
 ReactView(webRouter, globalScope);
+Helper(globalScope);
 
 app.use(Static('assets/'))
     .use(Formidable())

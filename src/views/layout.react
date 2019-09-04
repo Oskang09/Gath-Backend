@@ -8,7 +8,8 @@ const styles = {
     },
     container: {
         marginLeft: '250px',
-        padding: '50px'
+        paddingTop: '20px',
+        paddingLeft: '30px'
     },
     navigator: {
         backgroundColor: '#eee',
@@ -23,6 +24,39 @@ const styles = {
     }
 };
 
+function Form(props) {
+    return (
+        <form action={`?action=${props.api}`} method="POST" encType="multipart/form-data">
+            <h1>{props.title}</h1>
+            <div>
+                {props.children}
+            </div>
+
+            <input type="hidden" name="_csrf" value={props.csrf} />
+            <input type="submit" value="Submit" />
+
+            { props.error && <p>{props.error.toJSON ? JSON.stringify(props.error) : props.error.toString()}</p> }
+        </form>
+    ) 
+}
+
+function Input(props) {
+    const { field, label, input } = props;
+    const inputProps = typeof input !== 'object' ?
+        { type: input } :
+        input;
+    return (
+        <div key={field} style={{ margin: 10 }}>
+            <label htmlFor={field}>{label}</label>
+            {
+                inputProps.type === 'textarea' ?
+                    <textarea id={field} name={field} {...inputProps}  /> :
+                    <input id={field} name={field} {...inputProps} />
+            }
+        </div>
+    );
+}
+
 function Link(props) {
     return (
         <a href={props.go} style={styles.navigator}>{props.title}</a>
@@ -30,26 +64,29 @@ function Link(props) {
 }
 
 function Component(props) {
-    const Content = require(`./${props.view}`);
+    const Content = require(`./pages/${props.view}`);
     return (
         <html>
             <head>
                 <title>{props.title || 'Gath Admin'}</title>
             </head>
             <body>
-                <div>
-                    <div style={styles.sidebar}>
-                        <Link go="/web/" title="Home" />
-                        <Link go="/web/create_shop" title="Create Shop" />
-                        {
-                            props.admin ? 
-                                <Link go="/web/logout" title="Logout" /> :
-                                <Link go="/web/login" title="Login" />
-                        }
-                    </div>
-                    <div style={styles.container}>
-                        <Content {...props} />
-                    </div>
+                <div style={styles.sidebar}>
+                    <Link go="/web/" title="Home" />
+                    <Link go="/web/create_shop" title="Create Shop" />
+                    <Link go="/web/create_post" title="Create Post" />
+                    <Link go="/web/create_voucher" title="Create Voucher" />
+                    {
+                        props.admin ? 
+                            <Link go="/web/logout" title="Logout" /> :
+                            <Link go="/web/login" title="Login" />
+                    }
+                </div>
+                <div style={styles.container}>
+                    <Content
+                        {...props}
+                        components={{ Form, Input, Link }}
+                    />
                 </div>
             </body>
         </html>

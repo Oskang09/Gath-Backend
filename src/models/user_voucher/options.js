@@ -1,5 +1,5 @@
 module.exports = {
-    timestamps: true,
+    timestamps: false,
     freezeTableName: true,
     tableName: 'user_voucher',
 };

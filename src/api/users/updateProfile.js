@@ -19,7 +19,7 @@ module.exports = {
         if (params.avatar) {
             await this.cdn.upload(params.avatar, `user-${ctx.state.user.id}`);
         }
-
+        const updated = instance.update(params);
         return updated;
     },
 };
