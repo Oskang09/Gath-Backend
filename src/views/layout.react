@@ -1,5 +1,15 @@
 const React       = require('react');
 
+const Table = require('./components/Table');
+const Input = require('./components/Input');
+const Form = require('./components/Form');
+
+function Link(props) {
+    return (
+        <a href={props.go} style={styles.navigator}>{props.title}</a>
+    );
+}
+
 const styles = {
     sidebar: {
         height: '100%',
@@ -9,7 +19,8 @@ const styles = {
     container: {
         marginLeft: '250px',
         paddingTop: '20px',
-        paddingLeft: '30px'
+        paddingLeft: '30px',
+        paddingRight: '30px',
     },
     navigator: {
         backgroundColor: '#eee',
@@ -24,51 +35,13 @@ const styles = {
     }
 };
 
-function Form(props) {
-    return (
-        <form action={`?action=${props.api}`} method="POST" encType="multipart/form-data">
-            <h1>{props.title}</h1>
-            <div>
-                {props.children}
-            </div>
-
-            <input type="hidden" name="_csrf" value={props.csrf} />
-            <input type="submit" value="Submit" />
-
-            { props.error && <p>{props.error.toJSON ? JSON.stringify(props.error) : props.error.toString()}</p> }
-        </form>
-    ) 
-}
-
-function Input(props) {
-    const { field, label, input } = props;
-    const inputProps = typeof input !== 'object' ?
-        { type: input } :
-        input;
-    return (
-        <div key={field} style={{ margin: 10 }}>
-            <label htmlFor={field}>{label}</label>
-            {
-                inputProps.type === 'textarea' ?
-                    <textarea id={field} name={field} {...inputProps}  /> :
-                    <input id={field} name={field} {...inputProps} />
-            }
-        </div>
-    );
-}
-
-function Link(props) {
-    return (
-        <a href={props.go} style={styles.navigator}>{props.title}</a>
-    );
-}
-
 function Component(props) {
     const Content = require(`./pages/${props.view}`);
     return (
         <html>
             <head>
                 <title>{props.title || 'Gath Admin'}</title>
+                <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossOrigin="anonymous" />
             </head>
             <body>
                 <div style={styles.sidebar}>
@@ -76,6 +49,7 @@ function Component(props) {
                     <Link go="/web/create_shop" title="Create Shop" />
                     <Link go="/web/create_post" title="Create Post" />
                     <Link go="/web/create_voucher" title="Create Voucher" />
+                    <Link go="/web/list_shop?_apis=getShops" title="List Shop" />
                     {
                         props.admin ? 
                             <Link go="/web/logout" title="Logout" /> :
@@ -85,12 +59,12 @@ function Component(props) {
                 <div style={styles.container}>
                     <Content
                         {...props}
-                        components={{ Form, Input, Link }}
+                        components={{ Form, Input, Table }}
                     />
                 </div>
             </body>
         </html>
     );
-};
+}
 
 module.exports = Component;

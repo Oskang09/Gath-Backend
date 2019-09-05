@@ -1,5 +1,10 @@
 const React = require('react');
 
+const typeSelection = [
+    { value: 'FOOD', display: 'Food' },
+    { value: 'WATER', display: 'Water' },
+];
+
 function Component(props) {
 
     if (props.response) {
@@ -23,7 +28,7 @@ function Component(props) {
             <Input label="Title : " field="title" input="text" />
             <Input label="Banner : " field="image" input="file" />
             <Input label="Content : " field="content" input={{ type: "textarea", rows: 5, cols: 50 }} />
-            <Input label="Type : " field="type" input="text" />
+            <Input label="Type : " field="type" input="selection" selection={typeSelection} />
         </Form>
     );
 };

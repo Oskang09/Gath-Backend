@@ -11,6 +11,7 @@ module.exports = {
         result.comments.push({
             comment: params.comment,
             by: ctx.state.user.id,
+            name: ctx.state.user.name,
             when: Date.now()
         });
         await result.update({ comments: result.comments });

@@ -6,6 +6,15 @@ module.exports = {
     method: 'GET',
     handler: async function () {
         return {
+            shopType: [
+                { value: '', display: '' }
+            ],
+            postType: [
+                { value: '', display: '' }
+            ],
+            eventType: [
+                { value: '', display: '' }
+            ],
             constellation: [
                 'Aries',
                 'Taurus',

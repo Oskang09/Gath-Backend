@@ -3,7 +3,7 @@ module.exports = {
         api: '/events/:event',
         internal: 'eventAction',
     },
-    method: 'PATCH',
+    method: 'POST',
     before: [ 'verifyToken' ],
     handler: async function(params, ctx) {
         const { event, event_user } = this.sequelizeModels;
@@ -43,5 +43,7 @@ module.exports = {
                 await eventRes.update({ status: 'END' });
                 break;
         }
+
+        return {};
     },
 };

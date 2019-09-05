@@ -1,14 +1,9 @@
-const UUID = require('uuid/v4');
 const fs = require('fs');
 
 module.exports = function(router, globalScope) {
 
-    const csrfToken = [];
     const render = async (props, ctx) => {
-        const csrf = UUID();
-        csrfToken.push(csrf);
-        Object.assign(props, { csrf });
-    
+        Object.assign(props, { admin: ctx.state.user });
         try {
             await ctx.render('layout', props);
         } catch (error) {
@@ -18,6 +13,16 @@ module.exports = function(router, globalScope) {
 
     router.get('/web/*', async function (ctx) {
         const view = ctx.params['0'] || 'index';
+        const data = {};
+
+        const apis = ctx.query._apis;
+        if (apis) {
+            const apiList = apis.includes(',') ? apis.split(',') : [ apis ];
+            for (const apiName of apiList) {
+                data[apiName] = await globalScope.api[apiName](ctx.query);
+            }
+        }
+
         const accessToken = ctx.cookies.get('gath-admin');
         if (accessToken) {
             if (view === 'logout') {
@@ -35,15 +40,12 @@ module.exports = function(router, globalScope) {
             return ctx.redirect('/web/login');
         }
 
-        return render({ 
-            view, 
-            api: globalScope.api,
-            admin: ctx.state.user,
-        }, ctx);
+        return render({ view, data }, ctx);
     });
 
     router.post('/web/*', async function (ctx) {
         const view = ctx.params['0'];
+
         const accessToken = ctx.cookies.get('gath-admin');
         if (accessToken) {
             ctx.state.user = await globalScope.api.getAdmin({ token: accessToken });
@@ -57,14 +59,6 @@ module.exports = function(router, globalScope) {
             return ctx.redirect('/web/login');
         }
 
-        const token = ctx.request.body._csrf;
-        const index = csrfToken.indexOf(token);
-        if (index !== -1) {
-            csrfToken.splice(index, 1);
-        } else {
-            return ctx.render('error', { error: 'Invalid csrf token. Try reload page.' });
-        }
-
         const api = ctx.query.action;
         const params = {};
         Object.assign(params, ctx.request.body);
@@ -76,18 +70,10 @@ module.exports = function(router, globalScope) {
         try {
             const response = await globalScope.api[api](params, ctx, true);
             if (!ctx.body) {
-                return render({ 
-                    view, response, 
-                    api: globalScope.api,
-                    admin: ctx.state.user,
-                }, ctx);
+                return render({ view, response }, ctx);
             }
         } catch (error) {
-            return render({
-                view, error,
-                api: globalScope.api,
-                admin: ctx.state.user,
-            }, ctx);
+            return render({ view, error }, ctx);
         }
     });
 };
