@@ -21,10 +21,32 @@ module.exports = {
                 if (eventUser) throw "ALREADY_JOIN_EVENT";
                 await event_user.create({ eventId: params.event, userId, status: 'REQUESTING'})
                 break;
+            case 'REJECT':
+            case 'KICK':
+                if (eventRes.organizerId !== userId) throw "NOT_EVENT_OWNER";
+                if (!params.user)                    throw "MISSING_USER_PARAM";
+                const rejectTarget = await event_user.findOne({
+                    where: {
+                        eventId: params.event,
+                        userId: params.user,
+                    },
+                });
+                if (rejectTarget) {
+                    await rejectTarget.destroy();
+                }
+                break;
             case 'ACCEPT':
                 if (eventRes.organizerId !== userId) throw "NOT_EVENT_OWNER";
                 if (!params.user)                    throw "MISSING_USER_PARAM";
-                await eventUser.update({ status: 'MEMBER' });
+                const acceptTarget = await event_user.findOne({
+                    where: {
+                        eventId: params.event,
+                        userId: params.user,
+                    },
+                });
+                if (acceptTarget) {
+                    await acceptTarget.update({ status: 'MEMBER' });
+                }
                 break;
             case 'CHECK_IN':
                 if (!eventUser) throw "HAVENT_JOIN_EVENT";

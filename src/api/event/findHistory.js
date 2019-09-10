@@ -1,9 +1,7 @@
-const Op = require('sequelize').Op;
-
 module.exports = {
     path: {
-        api: '/events',
-        internal: 'findEvents',
+        api: '/history',
+        internal: 'findHistory',
     },
     method: 'GET',
     before: [ 'verifyToken' ],
@@ -12,16 +10,9 @@ module.exports = {
         const page = Number(params.page) || 1;
         const offset = ( page - 1 ) * limit;
         const where = {
-            status: {
-                [Op.not]: 'END'
-            }
+            status: 'END'
         };
 
-        if (params.name) {
-            where.name = {
-                [Op.like]: `%${params.name}%`
-            };
-        }
         if (params.type) {
             where.type = params.type.includes(',') ? 
                 params.type.split(',') :

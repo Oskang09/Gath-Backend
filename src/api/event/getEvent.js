@@ -1,3 +1,5 @@
+const Op = require('sequelize').Op;
+
 module.exports = {
     path: {
         api: '/events/:id',
@@ -8,14 +10,30 @@ module.exports = {
     handler: async function(params, ctx) {
         const { event, event_user } = this.sequelizeModels;
 
-        if (params.id === 'me') {
+        if (params.id === 'running') {
+            const eventIds = await event_user.findAll({
+                where: {
+                    userId: ctx.state.user.id,
+                },
+                select: [ 'eventId' ],
+                raw: true,
+            });
+            const result = await event.findOne({
+                where: {
+                    id: eventIds.map((event) => event.eventId),
+                    status: 'START'
+                },
+            });
+            return result;
+        }
+        else if (params.id === 'me') {
             const limit = Number(params.limit) || 1;
             const page = Number(params.page) || 1;
             const offset = ( page - 1 ) * limit;
 
             const { count, rows } = await event_user.findAndCountAll({
                 where: {
-                    userId: ctx.state.user.id
+                    userId: ctx.state.user.id,
                 },
                 limit, offset,
                 select: [ 'eventId' ],
@@ -23,7 +41,10 @@ module.exports = {
             });
             const result = await event.findAll({
                 where: {
-                    id: rows.map((event) => event.eventId)
+                    id: rows.map((event) => event.eventId),
+                    status: {
+                        [Op.not]: 'END'
+                    }
                 },
             });
             return {

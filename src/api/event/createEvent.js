@@ -12,20 +12,14 @@ module.exports = {
             async (transaction) => {
                 const result = await event.create({
                     organizerId: ctx.state.user.id,
-                    shopId: params[2].shop.id,
-                    location: params[2].shop.locate,
+                    shopId: params[2].id,
+                    location: params[2].locate,
                     desc: params[1],
                     type: params[0].type,
                     name: params[0].name,
                     start_time: params[0].start,
                     status: 'PENDING',
-                    comments: [
-                        {
-                            comment: params[1],
-                            by: ctx.state.user.name,
-                            when: Date.now(),
-                        }
-                    ]
+                    comments: []
                 }, { transaction });
                 const bridge = await event_user.create({
                     eventId: result.id,

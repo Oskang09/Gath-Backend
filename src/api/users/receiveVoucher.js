@@ -7,16 +7,13 @@ module.exports = {
     before: [ 'verifyToken' ],
     handler: async function(params, ctx) {
         const { user_voucher, voucher } = this.sequelizeModels;
-        const { expiredAt, count } = await voucher.findByPk(params.voucher, {
-            raw: true,
-            select: [ 'expiredAt', 'count' ]
-        });
+        const targetVoucher = await voucher.findByPk(params.voucher);
 
-        if (count <= 0) {
+        if (targetVoucher.count <= 0) {
             throw 'EMPTY_VOUCHER';
         }
 
-        if (Date.now() > expiredAt) {
+        if (Date.now() > targetVoucher.expiredAt) {
             throw 'EXPIRED_VOUCHER';
         }
 
@@ -30,12 +27,17 @@ module.exports = {
         if (result) {
             throw 'RECEIVED_VOUCHER';
         }
-        
-        const response = await user_voucher.create({
-            userId: ctx.state.user.id,
-            voucherId: params.voucher,
-            receivedAt: Date.now()
-        });
-        return response;
+
+        return this.tsql(
+            async (transaction) => {
+                await targetVoucher.decrement('count', { by: 1, transaction });
+                const response = await user_voucher.create({
+                    userId: ctx.state.user.id,
+                    voucherId: params.voucher,
+                    receivedAt: Date.now()
+                }, { transaction });
+                return response;
+            }
+        );
     },
 };
