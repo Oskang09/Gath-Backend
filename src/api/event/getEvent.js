@@ -24,6 +24,9 @@ module.exports = {
                     status: 'START'
                 },
             });
+            if (!result) {
+                throw "NO_EVENT_RUNNING";
+            }
             return result;
         }
         else if (params.id === 'me') {

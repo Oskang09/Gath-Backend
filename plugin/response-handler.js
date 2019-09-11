@@ -17,13 +17,14 @@ module.exports = function (setting, globalScope) {
                 }
                 ctx.body = {
                     ok: false,
-                    ...errorMessage
+                    error,
+                    message: errorMessage
                 };
             } else {
                 ctx.body = {
                     ok: false,
-                    message: error
-                }
+                    error,
+                };
             }
         }
 

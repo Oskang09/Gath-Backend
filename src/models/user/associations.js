@@ -4,9 +4,10 @@ module.exports = ({
     event_user,
     voucher,
     user_voucher,
+    comment
 }) =>
 {
-    user.hasMany(event, { foreignKey: 'organizerId' });
+    user.hasMany(comment, { foreignKey: 'userId' });
     user.belongsToMany(event, {
         through: {
             model: event_user,

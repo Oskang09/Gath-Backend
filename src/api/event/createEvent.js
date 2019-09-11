@@ -11,7 +11,6 @@ module.exports = {
         return this.tsql(
             async (transaction) => {
                 const result = await event.create({
-                    organizerId: ctx.state.user.id,
                     shopId: params[2].id,
                     location: params[2].locate,
                     desc: params[1],
@@ -19,11 +18,10 @@ module.exports = {
                     name: params[0].name,
                     start_time: params[0].start,
                     status: 'PENDING',
-                    comments: []
                 }, { transaction });
                 const bridge = await event_user.create({
                     eventId: result.id,
-                    userId: result.organizerId,
+                    userId: ctx.state.user.id,
                     status: 'OWNER',
                 }, { transaction });
                 

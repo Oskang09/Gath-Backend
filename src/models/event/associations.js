@@ -1,11 +1,12 @@
 module.exports = ({
     event,
-    user,
     event_user,
+    user,
     shop,
+    comment,
 }) =>
 {
-    event.belongsTo(user, { foreignKey: 'organizerId' });
+    event.hasMany(comment, { foreignKey: 'eventId' });
     event.belongsTo(shop, { foreignKey: 'shopId' });
     event.belongsToMany(user, {
         through: {

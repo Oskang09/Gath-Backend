@@ -11,7 +11,8 @@ module.exports = {
             title: params.title,
             content: params.content,
             type: params.type,
-            shopId: params.shop
+            shopId: params.shop,
+            voucherId: params.voucher
         }, { raw: true });
 
         if (params.image) {

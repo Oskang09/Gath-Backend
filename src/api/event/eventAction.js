@@ -12,7 +12,7 @@ module.exports = {
         const eventUser = await event_user.findOne({
             where: {
                 eventId: params.event,
-                userId: userId,
+                userId,
             },
         });
 
@@ -23,8 +23,8 @@ module.exports = {
                 break;
             case 'REJECT':
             case 'KICK':
-                if (eventRes.organizerId !== userId) throw "NOT_EVENT_OWNER";
-                if (!params.user)                    throw "MISSING_USER_PARAM";
+                if (eventUser.status !== 'OWNER') throw "NOT_EVENT_OWNER";
+                if (!params.user)                 throw "MISSING_USER_PARAM";
                 const rejectTarget = await event_user.findOne({
                     where: {
                         eventId: params.event,
@@ -36,8 +36,8 @@ module.exports = {
                 }
                 break;
             case 'ACCEPT':
-                if (eventRes.organizerId !== userId) throw "NOT_EVENT_OWNER";
-                if (!params.user)                    throw "MISSING_USER_PARAM";
+                if (eventUser.status !== 'OWNER') throw "NOT_EVENT_OWNER";
+                if (!params.user)                 throw "MISSING_USER_PARAM";
                 const acceptTarget = await event_user.findOne({
                     where: {
                         eventId: params.event,
@@ -57,11 +57,11 @@ module.exports = {
                 await eventUser.destroy();
                 break;
             case 'START_EVENT':
-                if (eventRes.organizerId !== userId) throw "NOT_EVENT_OWNER";
+                if (eventUser.status !== 'OWNER') throw "NOT_EVENT_OWNER";
                 await eventRes.update({ status: 'START' });
                 break;
             case 'END_EVENT':
-                if (eventRes.organizerId !== userId) throw "NOT_EVENT_OWNER";
+                if (eventUser.status !== 'OWNER') throw "NOT_EVENT_OWNER";
                 await eventRes.update({ status: 'END' });
                 break;
         }

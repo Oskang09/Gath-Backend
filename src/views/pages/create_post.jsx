@@ -25,6 +25,7 @@ function Component(props) {
     return (
         <Form api="createPost" title="Create Post" csrf={props.csrf} error={props.error}>
             <Input label="Shop ID : " field="shop" input="number" />
+            <Input label="Voucher ID : " field="voucher" input="number" />
             <Input label="Title : " field="title" input="text" />
             <Input label="Banner : " field="image" input="file" />
             <Input label="Content : " field="content" input={{ type: "textarea", rows: 5, cols: 50 }} />

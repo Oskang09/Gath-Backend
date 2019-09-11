@@ -6,7 +6,6 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
     },
-    organizerId: Sequelize.INTEGER,
     shopId: Sequelize.INTEGER,
     
     type: Sequelize.STRING,
@@ -23,9 +22,4 @@ module.exports = {
      * END - Event ended
      */
     status: Sequelize.STRING,
-    comments: {
-        type: Sequelize.JSONB,
-        defaultValue: [],
-    },
-
 };
