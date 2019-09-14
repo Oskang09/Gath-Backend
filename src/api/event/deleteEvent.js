@@ -6,7 +6,7 @@ module.exports = {
     method: 'DELETE',
     before: [ 'verifyToken' ],
     handler: async function(params, ctx) {
-        const { event } = this.sequelizeModels;
+        const { event, event_user } = this.sequelizeModels;
         const instance = await event.findByPk(params.id);
         if (!instance) {
             throw "MISSING_EVENT";

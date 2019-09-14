@@ -7,24 +7,30 @@ module.exports = function (setting, globalScope) {
             await next();
         } catch (error) {
             console.log(ctx.path, error);
-            const errorSetting = setting[error];
-            if (errorSetting) {
-                let errorMessage;
-                if (typeof errorSetting === 'string' || typeof errorSetting === 'object') {
-                    errorMessage = errorSetting;
-                } else if (typeof errorSetting === 'function') {
-                    errorMessage = errorSetting(error);
-                }
+            if (error instanceof Error) {
                 ctx.body = {
                     ok: false,
-                    error,
-                    message: errorMessage
+                    message: error.message,
                 };
             } else {
-                ctx.body = {
-                    ok: false,
-                    error,
-                };
+                const errorSetting = setting[error];
+                if (errorSetting) {
+                    let errorMessage;
+                    if (typeof errorSetting === 'string' || typeof errorSetting === 'object') {
+                        errorMessage = errorSetting;
+                    } else if (typeof errorSetting === 'function') {
+                        errorMessage = errorSetting(error);
+                    }
+                    ctx.body = {
+                        ok: false,
+                        message: errorMessage
+                    };
+                } else {
+                    ctx.body = {
+                        ok: false,
+                        message: error,
+                    };
+                }
             }
         }
 
