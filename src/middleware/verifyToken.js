@@ -14,6 +14,7 @@ module.exports = {
                         raw: true,
                     });
                 } catch (error) {
+                    console.log(error);
                     ctx.state.user = null;
                 }
             }

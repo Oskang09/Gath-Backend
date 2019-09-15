@@ -1,8 +1,14 @@
 const Sequelize = require('sequelize');
 
 module.exports = {
-    eventId: Sequelize.INTEGER,
-    userId: Sequelize.INTEGER,
+    eventId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+    },
+    userId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+    },
 
     /**
      * @enum User's EventStatus

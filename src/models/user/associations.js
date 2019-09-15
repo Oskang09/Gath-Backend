@@ -1,23 +1,13 @@
 module.exports = ({
-    event,
     user,
+    comment,
+    notification,
     event_user,
-    voucher,
-    user_voucher,
-    comment
+    user_voucher
 }) =>
 {
     user.hasMany(comment, { foreignKey: 'userId' });
-    user.belongsToMany(event, {
-        through: {
-            model: event_user,
-        },
-        foreignKey: 'userId',
-    });
-    user.belongsToMany(voucher, {
-        through: {
-            model: user_voucher,
-        },
-        foreignKey: "userId",
-    });
+    user.hasMany(notification, { foreignKey: 'userId' });
+    user.hasMany(event_user, { foreignKey: 'userId' });
+    user.hasMany(user_voucher, { foreignKey: 'userId' });
 };

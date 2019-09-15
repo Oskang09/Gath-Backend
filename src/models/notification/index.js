@@ -1,10 +1,8 @@
 const attributes = require('./attributes');
 const options = require('./options');
-const association = require('./associations');
 
 module.exports = {
-    name: 'event_user',
+    name: 'notification',
     attributes,
     options,
-    association
 };

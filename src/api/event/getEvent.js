@@ -11,23 +11,16 @@ module.exports = {
         const { event, event_user } = this.sequelizeModels;
 
         if (params.id === 'running') {
-            const eventIds = await event_user.findAll({
+            const running = await event_user.findOne({
                 where: {
                     userId: ctx.state.user.id,
                 },
-                select: [ 'eventId' ],
-                raw: true,
+                include: [ event ],
             });
-            const result = await event.findOne({
-                where: {
-                    id: eventIds.map((event) => event.eventId),
-                    status: 'START'
-                },
-            });
-            if (!result) {
+            if (!running) {
                 throw "NO_EVENT_RUNNING";
             }
-            return result;
+            return running.event;
         }
         else if (params.id === 'me') {
             const limit = Number(params.limit) || 1;
@@ -35,24 +28,22 @@ module.exports = {
             const offset = ( page - 1 ) * limit;
 
             const { count, rows } = await event_user.findAndCountAll({
+                limit, offset,
                 where: {
                     userId: ctx.state.user.id,
                 },
-                limit, offset,
-                select: [ 'eventId' ],
-                raw: true,
-            });
-            const result = await event.findAll({
-                where: {
-                    id: rows.map((event) => event.eventId),
-                    status: {
-                        [Op.not]: 'END'
+                include: [{ 
+                    model: event,
+                    where: {
+                        status: {
+                            [Op.not]: 'END'
+                        }
                     }
-                },
+                }],
             });
             return {
                 pagination: { page, count, limit },
-                result,
+                result: rows,
             };
         } else if (Number(params.id) !== Number.NaN) {
             const result = await event.findByPk(params.id);

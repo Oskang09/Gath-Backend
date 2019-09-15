@@ -11,9 +11,9 @@ module.exports = {
         const offset = ( page - 1 ) * limit;
         const where = {};
 
-        if (params.name) {
+        if (params.name && params.name.length > 0) {
             where.name = {
-                [Op.like]: `%${params.name}%`
+                [Op.iRegexp]: params.name.split(' ').join('|')
             };
         }
         if (params.type) {

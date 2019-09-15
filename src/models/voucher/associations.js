@@ -1,15 +1,9 @@
 module.exports = ({
     voucher,
-    user,
-    user_voucher,
-    post
+    post,
+    user_voucher
 }) =>
 {
     voucher.belongsTo(post, { foreignKey: 'voucherId' });
-    voucher.belongsToMany(user, {
-        through: {
-            model: user_voucher,
-        },
-        foreignKey: "voucherId",
-    });
+    voucher.hasMany(user_voucher, { foreignKey: 'voucherId' });
 };

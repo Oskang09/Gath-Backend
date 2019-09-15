@@ -1,8 +1,14 @@
 const Sequelize = require('sequelize');
 
 module.exports = {
-    voucherId: Sequelize.INTEGER,
-    userId: Sequelize.INTEGER,
+    voucherId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+    },
+    userId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+    },
     usedAt: Sequelize.DATE,
     receiveAt: {
         type: Sequelize.DATE,

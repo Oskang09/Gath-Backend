@@ -19,7 +19,7 @@ module.exports = {
                     start_time: params[0].start,
                     status: 'PENDING',
                 }, { transaction });
-                const bridge = await event_user.create({
+                await event_user.create({
                     eventId: result.id,
                     userId: ctx.state.user.id,
                     status: 'OWNER',
@@ -29,7 +29,7 @@ module.exports = {
                     await this.cdn.upload(params[0].banner, `event-${result.id}`);
                 }
         
-                return { event: result, event_user: bridge };
+                return result;
             }
         );
     },
