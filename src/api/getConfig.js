@@ -83,6 +83,7 @@ module.exports = {
                 }
             },
             badges: [
+                'empty-badge',
                 'cat-lover',
                 'good-choice',
                 'hakka-boi',

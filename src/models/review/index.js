@@ -3,7 +3,7 @@ const options = require('./options');
 const association = require('./associations');
 
 module.exports = {
-    name: 'notification',
+    name: 'review',
     attributes,
     options,
     association

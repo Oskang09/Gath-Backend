@@ -5,6 +5,14 @@ module.exports = function (setting, globalScope) {
     FirebaseAdmin.initializeApp({ credential: FirebaseAdmin.credential.cert(setting) });
 
     const bucket = FirebaseAdmin.storage().bucket('gs://gathfyp2019.appspot.com');
+    
+    globalScope.pushNotification = ({ target, data, title, body }) => 
+        FirebaseAdmin.messaging().sendToDevice(
+            target, {
+                data,
+                notification: { title, body }
+            }
+        );
     globalScope.auth = FirebaseAdmin.auth();
     globalScope.bucket = bucket;
     globalScope.cdn = {

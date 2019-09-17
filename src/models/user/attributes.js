@@ -10,6 +10,10 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
     },
+    device_token: {
+        type: Sequelize.STRING,
+        unique: true
+    },
     utag: {
         type: Sequelize.STRING,
         unique: true,
@@ -21,9 +25,7 @@ module.exports = {
     constellation: Sequelize.STRING,
     gender: Sequelize.STRING,
     desc: Sequelize.STRING,
-    personality: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
-    },
+    personality: Sequelize.ARRAY(Sequelize.STRING),
     badge: {
         type: Sequelize.JSONB,
         defaultValue: {}

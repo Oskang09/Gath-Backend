@@ -1,7 +1,9 @@
 module.exports = ({
     user,
-    notification
+    notification,
+    event,
 }) =>
 {
     notification.belongsTo(user, { foreignKey: 'userId' });
+    notification.belongsTo(event, { foreignKey: 'eventId' });
 };

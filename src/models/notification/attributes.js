@@ -10,13 +10,17 @@ module.exports = {
     /**
      * @enum Notification's Types
      * 
-     * ACTION - event badges review ( EXTRA 'event' must provide )
-     * MESSAGE - just a useless message
+     * VIEW_EVENT - go to the event details
+     * REVIEW - event badges review ( EXTRA 'event' must provide )
+     * NONE - just a useless message
      */
-    type: Sequelize.STRING,
-    event: Sequelize.INTEGER,
+    action: Sequelize.STRING,
 
     about: Sequelize.STRING,
-    read: Sequelize.BOOLEAN,
     userId: Sequelize.INTEGER,
+    eventId: Sequelize.INTEGER,
+    createdAt: {
+        type: Sequelize.DATE,
+        defaultValue: Date.now(),
+    }
 };

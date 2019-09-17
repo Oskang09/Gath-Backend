@@ -11,16 +11,21 @@ module.exports = {
         const { event, event_user } = this.sequelizeModels;
 
         if (params.id === 'running') {
-            const running = await event_user.findOne({
+            const running = await event.findOne({
                 where: {
-                    userId: ctx.state.user.id,
+                    status: 'START'
                 },
-                include: [ event ],
+                include: [{
+                    model: event_user,
+                    where: {
+                        userId: ctx.state.user.id
+                    }
+                }],
             });
             if (!running) {
                 throw "NO_EVENT_RUNNING";
             }
-            return running.event;
+            return running;
         }
         else if (params.id === 'me') {
             const limit = Number(params.limit) || 1;
