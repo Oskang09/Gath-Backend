@@ -35,6 +35,7 @@ module.exports = {
     },
     messages: {
         INVALID_JSON_BODY: `Incoming data isn't 'application/json'.`,
-        MISSING_HEADER_TOKEN: `Header 'gath-token' is required.`
+        MISSING_HEADER_TOKEN: `Header 'gath-token' is required.`,
+        EXPIRED_VOUCHER: '',
     },
 };

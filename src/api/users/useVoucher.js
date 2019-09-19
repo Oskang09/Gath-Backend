@@ -12,7 +12,7 @@ module.exports = {
             select: [ 'expiredAt' ]
         });
 
-        if (Date.now() > expiredAt) {
+        if (Date.now() > new Date(expiredAt)) {
             throw 'EXPIRED_VOUCHER';
         }
         

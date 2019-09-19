@@ -49,7 +49,7 @@ module.exports = {
                             });
                             await notification.create({
                                 action: 'VIEW_EVENT',
-                                event: params.event,
+                                eventId: params.event,
                                 about: params.action === 'REJECT' ? 
                                     `Your request to event ${eventRes.name} have been rejected` :
                                     `You have been kicked from event ${eventRes.name}`,
@@ -80,7 +80,7 @@ module.exports = {
                             });
                             await notification.create({
                                 action: 'VIEW_EVENT',
-                                event: params.event,
+                                eventId: params.event,
                                 about: `Your request to event ${eventRes.name} have been accepted.`,
                                 userId: params.user,
                             }, { transaction });
@@ -88,10 +88,12 @@ module.exports = {
                         break;
                     case 'CHECK_IN':
                         if (!eventUser) throw "HAVENT_JOIN_EVENT";
+                        if (eventRes.status === 'END') throw "EVENT_ENDED";
                         await eventUser.update({ status: 'PARTICIPATED' }, { transaction })
                         break;
                     case 'QUIT':
                         if (!eventUser) throw "HAVENT_JOIN_EVENT";
+                        if (eventRes.status === 'START') throw "EVENT_STARTED";
                         await eventUser.destroy({ transaction });
                         break;
                     case 'START_EVENT':
@@ -112,7 +114,7 @@ module.exports = {
                         for (const ids of userIds) {
                             await notification.create({
                                 action: 'REVIEW',
-                                event: params.event,
+                                eventId: params.event,
                                 about: `Event ${eventRes.name} have ended. You can review other participants.`,
                                 userId: ids,
                                 read: false,

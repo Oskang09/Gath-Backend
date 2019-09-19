@@ -27,7 +27,7 @@ module.exports = {
         const result = [];
 
         for (const eventUser of all) {
-            if (alreadyUsers.includes(eventUser.userId) || eventUser.userId === ctx.state.user.id) continue;
+            if (alreadyUsers.includes(eventUser.user.userId) || eventUser.userId === ctx.state.user.id) continue;
             result.push(eventUser.user);
         }
         

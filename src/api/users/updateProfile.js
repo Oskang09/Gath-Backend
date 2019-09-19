@@ -8,18 +8,17 @@ module.exports = {
     handler: async function(params, ctx) {
         const { user } = this.sequelizeModels;
         const instance = await user.findByPk(ctx.state.user.id);
-        if (params.badge) {
-            const badges = {};
-            for (const badge of params.badge) {
-                badges[badge] = (instance.badge[badge] || 0) + 1;
-            }
-            params.badge = badges;
-        }
-        
         if (params.avatar) {
             await this.cdn.upload(params.avatar, `user-${ctx.state.user.id}`);
         }
-        const updated = instance.update(params);
-        return updated;
+        try {
+            const updated = await instance.update(params);
+            return updated;
+        } catch (error) {
+            const validateError = error.errors[0];
+            if (validateError.type === 'unique violation' && validateError.path === 'utag') {
+                throw "UTAG_UNIQUE_VIOLATION";
+            }
+        }
     },
 };

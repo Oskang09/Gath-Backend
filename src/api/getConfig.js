@@ -7,20 +7,20 @@ module.exports = {
     handler: async function () {
         return {
             shopType: [
-                { value: 'BEVERAGE', display: 'Beverage' },
-                { value: 'RESTAURANT', display: 'Restaurant' },
-                { value: 'BAR', display: 'Bar' },
+                { value: 'BEVERAGE', display: 'Beverage', icon: { package: 'simplelineicons', name: 'cup' } },
+                { value: 'RESTAURANT', display: 'Restaurant', icon: 'restaurant' },
+                { value: 'BAR', display: 'Bar', icon: { package: 'fontawesome5', name: 'wine-glass' } },
             ],
             postType: [
                 { value: 'VOUCHER', display: 'Voucher', icon: 'local-activity' },
-                { value: 'UPCOMING', display: 'Upcoming', icon: 'update' },
-                { value: 'UPDATE', display: 'News', icon: 'local-offer' },
+                { value: 'UPDATE', display: 'Update', icon: 'update' },
             ],
             eventType: [
                 { value: 'DINING', display: 'Dining', icon: 'local-dining' },
-                { value: 'DRINK', display: 'Drink', icon: 'local-cafe' },
+                { value: 'DRINK', display: 'Yum Cha', icon: 'local-cafe' },
+                { value: 'SHARE', display: 'Sharing', icon: { package: 'materialcommunityicons', name: 'microphone-variant' } },
                 { value: 'BGAME', display: 'Board Game', icon: { package: 'fontawesome5', name: 'chess-board' } },
-                { value: 'OGAME', display: 'Online Game', icon: { package: 'materialcommunityicons', name: 'steam' } }
+                { value: 'OGAME', display: 'Online Game', icon: { package: 'materialcommunityicons', name: 'steam' } },
             ],
             constellation: [
                 'Aries',

@@ -1,14 +1,18 @@
 const Sequelize = require('sequelize');
 
 module.exports = {
-    id: {
+    fromUserId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
     },
-    fromUserId: Sequelize.INTEGER,
-    toUserId: Sequelize.INTEGER,
-    eventId: Sequelize.INTEGER,
+    toUserId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+    },
+    eventId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+    },
 
     badge: Sequelize.STRING,
     comment: Sequelize.STRING,
@@ -17,9 +21,3 @@ module.exports = {
         defaultValue: Date.now(),
     }
 };
-
-
-/*
-    fromUser, toUserId !== same
-    event_user.include => eventId, toUser && not repeating
-*/

@@ -13,7 +13,7 @@ module.exports = {
             throw 'EMPTY_VOUCHER';
         }
 
-        if (Date.now() > targetVoucher.expiredAt) {
+        if (Date.now() > new Date(targetVoucher.expiredAt)) {
             throw 'EXPIRED_VOUCHER';
         }
 
