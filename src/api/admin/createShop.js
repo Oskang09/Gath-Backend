@@ -10,7 +10,7 @@ module.exports = {
 
         const instance = await shop.create({
             name: params.name,
-            locate: params.location,
+            location: params.location,
             type: params.type
         }, { raw: true });
 

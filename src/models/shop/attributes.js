@@ -8,17 +8,7 @@ module.exports = {
     },
     type: Sequelize.STRING,
     name: Sequelize.STRING,
-    locate: Sequelize.STRING,
-    operation_hours: {
-        type: Sequelize.JSONB,
-        defaultValue: {
-            monday: '',
-            tueday: '',
-            wednesday: '',
-            thursday: '',
-            friday: '',
-            saturday: '',
-            sunday: ''
-        },
-    },
+    location: Sequelize.STRING,
+    createdAt: Sequelize.DATE,
+    updatedAt: Sequelize.DATE,
 };

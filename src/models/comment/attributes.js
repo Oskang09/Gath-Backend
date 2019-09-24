@@ -11,6 +11,22 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Date.now(),
     },
-    userId: Sequelize.INTEGER,
-    eventId: Sequelize.INTEGER,
+    eventId: {
+        type: Sequelize.INTEGER,
+        references: {
+            table: 'public.events',
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+    },
+    userId: {
+        type: Sequelize.INTEGER,
+        references: {
+            table: 'public.users',
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+    },
 };

@@ -17,8 +17,8 @@ module.exports = {
         }
 
         return instance.update({
-            shopId: params[2].id,
-            location: params[2].locate,
+            shop: params[2].shop,
+            location: params[2].location,
             desc: params[1],
             type: params[0].type,
             name: params[0].name,

@@ -5,5 +5,5 @@ module.exports = ({
 }) =>
 {
     post.belongsTo(shop, { foreignKey: 'shopId' });
-    post.hasOne(voucher, { foreignKey: 'postId' });
+    post.belongsTo(voucher, { foreignKey: 'voucherId' });
 };

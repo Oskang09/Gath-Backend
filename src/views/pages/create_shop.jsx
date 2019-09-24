@@ -9,7 +9,7 @@ function Component(props) {
                 <h1>Created New Shop</h1>
                 <p>ID : {shop.id}</p>
                 <p>Name : {shop.name}</p>
-                <p>Locate : {shop.locate}</p>
+                <p>Location : {shop.locaiton}</p>
                 <p>Image: </p><img src={shop.image} />
             </div>
         );

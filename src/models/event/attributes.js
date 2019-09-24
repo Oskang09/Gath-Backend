@@ -6,13 +6,13 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
     },
-    shopId: Sequelize.INTEGER,
     
     type: Sequelize.STRING,
     name: Sequelize.STRING,
     desc: Sequelize.STRING,
     start_time: Sequelize.DATE,
     location: Sequelize.STRING,
+    shop: Sequelize.STRING,
 
     /**
      * @enum EventStatus

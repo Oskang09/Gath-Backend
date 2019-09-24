@@ -9,6 +9,22 @@ module.exports = {
     title: Sequelize.STRING,
     content: Sequelize.STRING,
     type: Sequelize.STRING,
-    voucherId: Sequelize.INTEGER,
-    shopId: Sequelize.INTEGER,
+    voucherId: {
+        type: Sequelize.INTEGER,
+        references: {
+            table: 'public.vouchers',
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+    },
+    shopId: {
+        type: Sequelize.INTEGER,
+        references: {
+            table: 'public.shops',
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+    },
 };

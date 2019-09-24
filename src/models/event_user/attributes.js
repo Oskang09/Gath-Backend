@@ -4,10 +4,22 @@ module.exports = {
     eventId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        references: {
+            table: 'public.events',
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
     },
     userId: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        references: {
+            table: 'public.users',
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
     },
 
     /**

@@ -9,6 +9,8 @@ module.exports = {
     title: Sequelize.STRING,
     description: Sequelize.STRING,
     count: Sequelize.INTEGER,
-    shopId: Sequelize.INTEGER,
     expiredAt: Sequelize.DATE,
+    shopId: {
+        type: Sequelize.INTEGER,
+    }
 };

@@ -7,12 +7,11 @@ module.exports = {
     before: [ 'verifyToken' ],
     handler: async function(params, ctx) {
         const { event, event_user } = this.sequelizeModels;
-        
         return this.tsql(
             async (transaction) => {
                 const result = await event.create({
-                    shopId: params[2].id,
-                    location: params[2].locate,
+                    shop: params[2].shop,
+                    location: params[2].location,
                     desc: params[1],
                     type: params[0].type,
                     name: params[0].name,

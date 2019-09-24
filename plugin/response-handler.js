@@ -6,7 +6,6 @@ module.exports = function (setting, globalScope) {
         try {
             await next();
         } catch (error) {
-            // console.log(ctx.path, error);
             if (error instanceof Error) {
                 ctx.body = {
                     ok: false,
