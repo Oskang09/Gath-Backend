@@ -11,7 +11,7 @@ module.exports = {
         urlencoded: true,
     },
     sequelize: {
-        url: 'postgresql://postgres:oskang09@127.0.0.1:5432/gath',
+        url: process.env.DATABASE_URL,
         options: {
             timestamps: false,
             logging: false,
