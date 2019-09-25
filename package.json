@@ -9,12 +9,10 @@
   },
   "author": "Oskang09",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "babel-preset-react": "^6.24.1",
     "eslint": "^6.0.1",
-    "nodemon": "^1.19.1"
-  },
-  "dependencies": {
+    "nodemon": "^1.19.1",
     "babel-core": "^6.26.3",
     "firebase-admin": "^8.2.0",
     "glob": "^7.1.4",
