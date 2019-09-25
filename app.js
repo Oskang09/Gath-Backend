@@ -45,4 +45,4 @@ app.use(Static('assets/'))
     .use(router.allowedMethods())
     .use(webRouter.routes())
     .use(webRouter.allowedMethods())
-    .listen(3000, () => console.log(`PORT : ${3000}`));
+    .listen(process.env.PORT, () => console.log(`PORT : ${process.env.PORT}`));
