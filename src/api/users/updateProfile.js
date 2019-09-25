@@ -14,6 +14,7 @@ module.exports = {
             }
             Object.assign(params, { avatar: await this.cdn.upload(params.avatar) });
         }
+    
         try {
             const updated = await instance.update(params);
             return updated;

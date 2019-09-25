@@ -7,6 +7,7 @@ function Form(props) {
             action={`?action=${props.api}`}
             method="POST"
             encType="multipart/form-data"
+            style={props.style}
         >
             <h1>{props.title}</h1>
             <fieldset>
@@ -22,7 +23,7 @@ function Form(props) {
 
             { props.error && <p>{props.error.toJSON ? JSON.stringify(props.error) : props.error.toString()}</p> }
         </form>
-    ) 
+    );
 };
 
 module.exports = Form;

@@ -27,10 +27,6 @@ module.exports = {
     gender: Sequelize.STRING,
     desc: Sequelize.STRING,
     personality: Sequelize.ARRAY(Sequelize.STRING),
-    badge: {
-        type: Sequelize.JSONB,
-        defaultValue: {}
-    },
     status: Sequelize.STRING,
 
     createdAt: Sequelize.DATE,

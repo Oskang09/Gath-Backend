@@ -5,7 +5,7 @@ function Component(props) {
         return <p>Missing data.</p>;
     }
     const { Table } = props.components;
-    return <Table style={{ margin: 10 }} rows={props.data.findShop.result} />;
+    return <Table style={{ margin: 10 }} rows={props.data.findShop.result} deleteAction="deleteShop" />;
 }
 
 module.exports = Component;
