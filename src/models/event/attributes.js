@@ -7,6 +7,7 @@ module.exports = {
         autoIncrement: true,
     },
     
+    image: Sequelize.STRING,
     type: Sequelize.STRING,
     name: Sequelize.STRING,
     desc: Sequelize.STRING,

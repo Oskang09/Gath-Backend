@@ -3,7 +3,7 @@ const fs = require('fs');
 module.exports = function(router, globalScope) {
 
     const render = async (props, ctx) => {
-        Object.assign(props, { admin: ctx.state.user });
+        Object.assign(props, { admin: ctx.state.user, cdn: globalScope.cdn.parse });
         try {
             await ctx.render('layout', props);
         } catch (error) {

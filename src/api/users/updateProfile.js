@@ -9,7 +9,10 @@ module.exports = {
         const { user } = this.sequelizeModels;
         const instance = await user.findByPk(ctx.state.user.id);
         if (params.avatar) {
-            await this.cdn.upload(params.avatar, `user-${ctx.state.user.id}`);
+            if (instance.avatar) {
+                await this.cdn.remove(instance.avatar);
+            }
+            Object.assign(params, { avatar: await this.cdn.upload(params.avatar) });
         }
         try {
             const updated = await instance.update(params);

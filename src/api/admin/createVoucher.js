@@ -7,19 +7,16 @@ module.exports = {
     handler: async function (params) {
         const cdn = this.cdn;
         const { voucher } = this.sequelizeModels;
-        const instance = await voucher.create({
+        const body = {
             title: params.title,
             description: params.description,
             count: params.count,
             shopId: params.shop,
             expiredAt: params.expiredAt
-        }, { raw: true });
-
+        };
         if (params.image) {
-            await cdn.upload(params.image, `voucher-${instance.id}`);
+            Object.assign(body, { image: await cdn.upload(params.image) })
         }
-
-        Object.assign(instance, { image: cdn.parse(`voucher-${instance.id}`) })
-        return instance;
+        return voucher.create(body, { raw: true });
     },
 };

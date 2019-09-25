@@ -16,7 +16,7 @@ function Component(props) {
                 <p>Title : {post.title}</p>
                 <p>Content : {post.content}</p>
                 <p>Type : {post.type}</p>
-                <p>Image: </p><img src={post.image} />
+                <p>Image: </p><img src={props.cdn(post.image)} />
             </div>
         );
     }
@@ -29,7 +29,7 @@ function Component(props) {
             <Input label="Title : " field="title" input="text" />
             <Input label="Banner : " field="image" input="file" />
             <Input label="Content : " field="content" input={{ type: "textarea", rows: 5, cols: 50 }} />
-            <Input label="Type : " field="type" input="selection" selection={typeSelection} />
+            <Input label="Type : " field="type" input="selection" selection={props.data.serverConfig.postType} />
         </Form>
     );
 };

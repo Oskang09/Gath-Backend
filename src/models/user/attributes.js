@@ -20,6 +20,7 @@ module.exports = {
     },
     phone: Sequelize.STRING,
     
+    avatar: Sequelize.STRING,
     name: Sequelize.STRING,
     age: Sequelize.INTEGER,
     constellation: Sequelize.STRING,

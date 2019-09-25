@@ -46,10 +46,10 @@ function Component(props) {
             <body>
                 <div style={styles.sidebar}>
                     <Link go="/web/" title="Home" />
-                    <Link go="/web/create_shop" title="Create Shop" />
-                    <Link go="/web/create_post" title="Create Post" />
-                    <Link go="/web/create_voucher" title="Create Voucher" />
-                    <Link go="/web/list_shop?_apis=getShops" title="List Shop" />
+                    <Link go="/web/create_shop?_apis=serverConfig" title="Create Shop" />
+                    <Link go="/web/create_post?_apis=serverConfig" title="Create Post" />
+                    <Link go="/web/create_voucher?_apis=serverConfig" title="Create Voucher" />
+                    <Link go="/web/list_shop?_apis=findShop" title="List Shop" />
                     {
                         props.admin ? 
                             <Link go="/web/logout" title="Logout" /> :

@@ -9,7 +9,7 @@ module.exports = {
         const { event, event_user } = this.sequelizeModels;
         return this.tsql(
             async (transaction) => {
-                const result = await event.create({
+                const body = {
                     shop: params[2].shop,
                     location: params[2].location,
                     desc: params[1],
@@ -17,16 +17,16 @@ module.exports = {
                     name: params[0].name,
                     start_time: params[0].start,
                     status: 'PENDING',
-                }, { transaction });
+                };
+                if (params[0].banner) {
+                    Object.assign(body, { image: await this.cdn.upload(params[0].banner) });
+                }
+                const result = await event.create(body, { transaction });
                 await event_user.create({
                     eventId: result.id,
                     userId: ctx.state.user.id,
                     status: 'OWNER',
                 }, { transaction });
-                
-                if (params[0].banner) {
-                    await this.cdn.upload(params[0].banner, `event-${result.id}`);
-                }
         
                 return result;
             }

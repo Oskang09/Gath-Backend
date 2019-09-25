@@ -6,6 +6,7 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
     },
+    image: Sequelize.STRING,
     title: Sequelize.STRING,
     description: Sequelize.STRING,
     count: Sequelize.INTEGER,

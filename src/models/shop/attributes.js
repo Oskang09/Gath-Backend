@@ -6,6 +6,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
     },
+    image: Sequelize.STRING,
     type: Sequelize.STRING,
     name: Sequelize.STRING,
     location: Sequelize.STRING,

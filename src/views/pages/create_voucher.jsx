@@ -12,7 +12,7 @@ function Component(props) {
                 <p>Count : {voucher.count}</p>
                 <p>Shop ID : {voucher.shopId}</p>
                 <p>Expired At : {voucher.expiredAt.toString()}</p>
-                <p>Image : </p><img src={voucher.image} />
+                <p>Image: </p><img src={props.cdn(voucher.image)} />
             </div>
         );
     }

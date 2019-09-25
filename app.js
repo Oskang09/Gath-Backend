@@ -25,6 +25,7 @@ const globalScope = {
     sequelizeModels: null,
 };
 
+const port = process.env.PORT || 3000;
 const app = new Koa();
 const router = new Router();
 const webRouter = new Router();
@@ -45,4 +46,4 @@ app.use(Static('assets/'))
     .use(router.allowedMethods())
     .use(webRouter.routes())
     .use(webRouter.allowedMethods())
-    .listen(process.env.PORT, () => console.log(`PORT : ${process.env.PORT}`));
+    .listen(port, () => console.log(`PORT : ${port}`));
