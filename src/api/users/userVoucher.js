@@ -6,7 +6,7 @@ module.exports = {
     method: 'GET',
     before: [ 'verifyToken' ],
     handler: async function(params, ctx) {
-        const { user_voucher, user, voucher } = this.sequelizeModels;
+        const { user_voucher, user, voucher, shop } = this.sequelizeModels;
         const userId = params.id === 'me' ? ctx.state.user.id : params.id;
         const limit = Number(params.limit) || 1;
         const page = Number(params.page) || 1;
@@ -14,7 +14,13 @@ module.exports = {
 
         const { rows, count } = await user_voucher.findAndCountAll({
             limit, offset,
-            include: [ voucher, user ],
+            include: [
+                {
+                    model: voucher,
+                    include: [ shop ]
+                },
+                user
+            ],
             where: { userId },
         });
 

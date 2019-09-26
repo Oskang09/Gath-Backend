@@ -11,7 +11,5 @@ module.exports = {
     description: Sequelize.STRING,
     count: Sequelize.INTEGER,
     expiredAt: Sequelize.DATE,
-    shopId: {
-        type: Sequelize.INTEGER,
-    }
+    shopId: Sequelize.INTEGER,
 };

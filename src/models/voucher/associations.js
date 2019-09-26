@@ -1,9 +1,11 @@
 module.exports = ({
     voucher,
     post,
-    user_voucher
+    shop,
+    user_voucher,
 }) =>
 {
     voucher.hasMany(post, { foreignKey: 'voucherId' });
+    voucher.belongsTo(shop, { foreignKey: 'shopId' });
     voucher.hasMany(user_voucher, { foreignKey: 'voucherId' });
 };

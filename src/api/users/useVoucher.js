@@ -24,7 +24,11 @@ module.exports = {
         });
 
         if (!result) {
-            throw 'MISSING_VOUCHER';
+            throw 'NOT_ACQUIRED_VOUCHER';
+        }
+
+        if (result.usedAt) {
+            throw "USED_VOUCHER";
         }
         await result.update({ usedAt: Date.now() });
         return result;
