@@ -78,7 +78,7 @@ module.exports = {
                             action: 'VIEW_EVENT',
                             eventId: params.event,
                             about: `${ctx.state.user.name} has request to join your event.`,
-                            userId: event_user.id,
+                            userId: eventOwner.id,
                         }, { transaction })
                     ]);
                 }
@@ -128,7 +128,7 @@ module.exports = {
                             action: 'VIEW_EVENT',
                             eventId: params.event,
                             about: `${ctx.state.user.name} has quit from your event.`,
-                            userId: event_user.id,
+                            userId: eventOwner.id,
                         }, { transaction })
                     ]);
                 }

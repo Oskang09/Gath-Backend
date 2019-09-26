@@ -1,10 +1,5 @@
 const React = require('react');
 
-const typeSelection = [
-    { value: 'FOOD', display: 'Food' },
-    { value: 'WATER', display: 'Water' },
-];
-
 function Component(props) {
 
     if (props.response) {
