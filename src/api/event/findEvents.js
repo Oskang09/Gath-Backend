@@ -7,7 +7,7 @@ module.exports = {
     },
     method: 'GET',
     before: [ 'verifyToken' ],
-    handler: async function(params) {
+    handler: async function(params, ctx) {
         const limit = Number(params.limit) || 1;
         const page = Number(params.page) || 1;
         const offset = ( page - 1 ) * limit;
@@ -28,13 +28,28 @@ module.exports = {
                 params.type;;
         }
 
-        const { event } = this.sequelizeModels;
-        const { count, rows } = await event.findAndCountAll({
-            limit,
-            offset,
-            where,
-            raw: true
+        const { event, event_user } = this.sequelizeModels;
+        const { count, rows } = await event_user.findAndCountAll({
+            limit, offset,
+            where: {
+                [Op.or]: [
+                    {
+                        userId: {
+                            [Op.not]: ctx.state.user.id
+                        }
+                    },
+                    {
+                        status: {
+                            [Op.not]: 'OWNER'
+                        }
+                    }
+                ]
+            },
+            include: [{
+                model: event, where
+            }]
         });
+        
         return {
             pagination: { page, count, limit },
             result: rows,

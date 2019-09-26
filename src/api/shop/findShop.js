@@ -26,7 +26,7 @@ module.exports = {
 
         const { shop } = this.sequelizeModels;
         const { rows, count } = await shop.findAndCountAll({    
-            raw: true, limit, offset
+            raw: true, limit, offset, where
         });
         return {
             pagination: { page, count, limit },

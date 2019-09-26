@@ -33,13 +33,13 @@ module.exports = {
                 }
             );
             
+            const badge = {};
             if (badges && badges.length !== 0) {
-                const badge = {};
                 for (const obj of badges) {
                     badge[obj.badge] = parseInt(obj.num);
                 }
-                Object.assign(result, { badge });
             }
+            Object.assign(result, { badge });
         }
         return result;
     },
