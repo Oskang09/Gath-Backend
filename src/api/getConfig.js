@@ -16,8 +16,8 @@ module.exports = {
                 { value: 'UPDATE', display: 'Update', icon: 'update' },
             ],
             eventType: [
-                { value: 'DINING', display: 'Dining', icon: 'local-dining' },
-                { value: 'DRINK', display: 'Yum Cha', icon: 'local-cafe' },
+                { value: 'DINING', display: 'Dining', icon: { package: 'materialicons', name: 'local-dining' } },
+                { value: 'DRINK', display: 'Yum Cha', icon: { package: 'materialicons', name: 'local-cafe' } },
                 { value: 'SHARE', display: 'Sharing', icon: { package: 'materialcommunityicons', name: 'microphone-variant' } },
                 { value: 'BGAME', display: 'Board Game', icon: { package: 'fontawesome5', name: 'chess-board' } },
                 { value: 'OGAME', display: 'Online Game', icon: { package: 'materialcommunityicons', name: 'steam' } },
