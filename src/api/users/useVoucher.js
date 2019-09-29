@@ -30,7 +30,6 @@ module.exports = {
         if (result.usedAt) {
             throw "USED_VOUCHER";
         }
-        await result.update({ usedAt: Date.now() });
-        return result;
+        return result.update({ usedAt: Date.now() });
     },
 };

@@ -5,6 +5,7 @@ module.exports = function (setting, globalScope) {
         const start = moment();
         try {
             await next();
+            if (ctx.status === 404 && !ctx.body) return ctx.redirect('/web/');
         } catch (error) {
             if (error instanceof Error) {
                 ctx.body = {

@@ -5,6 +5,7 @@ const ReactEngine = require('koa-views');
 const Static      = require('koa-static');
 const BodyParser  = require('koa-bodyparser');
 const Formidable  = require('koa2-formidable');
+const Favicon     = require('koa-favicon');
 
 const RouteAPI    = require('./plugin/route-api');
 const Response    = require('./plugin/response-handler');
@@ -37,6 +38,7 @@ ReactView(webRouter, globalScope);
 Helper(globalScope);
 
 app.use(Static('assets/'))
+    .use(Favicon(__dirname + "/assets/favicon.ico"))
     .use(Formidable())
     .use(BodyParser(setting.bodyparser))
     .use(ReactEngine(__dirname + "/src/views", { extension: 'react' }))

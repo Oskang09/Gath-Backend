@@ -23,7 +23,35 @@ module.exports = {
             throw "NOT_EVENT_OWNER";
         }
 
-        await instance.destroy();
-        return instance;
+
+        const eventUsers = await event_user.findAll({
+            where: {
+                eventId: params.id
+            },
+            include: [ user ],
+            select: [ 'userId' ],
+        });
+        const asyncNotify = [ instance.destroy() ];
+        for (const eventUser of eventUsers) {
+            asyncNotify.push(
+                notification.create({
+                    action: 'NONE',
+                    eventId: params.id,
+                    about: `Event ${eventRes.name} have been deleted.`,
+                    userId: eventUser.userId,
+                }, { transaction }),
+                this.pushNotification({
+                    target: eventUser.user.device_token,
+                    data: {
+                        action: 'NONE',
+                        event: params.id.toString(),
+                    },
+                    title: `Event Information`,
+                    body: `Event ${eventRes.name} have been deleted.`
+                })
+            );
+        }
+
+        return Promise.all(asyncNotify);
     },
 };

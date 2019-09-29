@@ -5,8 +5,8 @@ module.exports = {
     },
     method: 'PUT',
     before: [ 'verifyToken' ],
-    handler: async function(params, ctx) {
-        const { event } = this.sequelizeModels;
+    handler: async function(params) {
+        const { event, user } = this.sequelizeModels;
         const instance = await event.findByPk(params.id);
         if (!instance) {
             throw "MISSING_INSTANCE";
@@ -28,6 +28,36 @@ module.exports = {
             Object.assign(body, { image: await this.cdn.upload(params[0].banner) });
         }
 
-        return instance.update(body);
+        const eventUsers = await event_user.findAll({
+            where: {
+                eventId: params.id
+            },
+            include: [ user ],
+            select: [ 'userId' ],
+        });
+        const asyncNotify = [
+            instance.update(body)
+        ];
+        for (const eventUser of eventUsers) {
+            asyncNotify.push(
+                notification.create({
+                    action: 'VIEW_EVENT',
+                    eventId: params.id,
+                    about: `Event owner of ${eventRes.name} have updated event information.`,
+                    userId: eventUser.userId,
+                }, { transaction }),
+                this.pushNotification({
+                    target: eventUser.user.device_token,
+                    data: {
+                        action: 'VIEW_EVENT',
+                        event: params.id.toString(),
+                    },
+                    title: `Event Information`,
+                    body: `Event owner of ${eventRes.name} have updated event information.`
+                })
+            );
+        }
+
+        return Promise.all(asyncNotify);
     },
 };

@@ -101,7 +101,7 @@ module.exports = {
                             action: 'VIEW_EVENT',
                             eventId: params.event,
                             about: `Your request to event ${eventRes.name} have been accepted.`,
-                            userId: params.user,
+                            userId: eventTarget.user.id,
                         }, { transaction }),
                     ]);
                 }
