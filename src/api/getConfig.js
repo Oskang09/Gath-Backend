@@ -4,8 +4,10 @@ module.exports = {
         internal: 'serverConfig',
     },
     method: 'GET',
-    handler: async function () {
+    before: [ 'verifyToken' ],
+    handler: async function (_, ctx) {
         return {
+            profile: ctx.state.user.id,
             shopType: [
                 { value: 'BEVERAGE', display: 'Beverage', icon: { package: 'simplelineicons', name: 'cup' } },
                 { value: 'RESTAURANT', display: 'Restaurant', icon: 'restaurant' },
