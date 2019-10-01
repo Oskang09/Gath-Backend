@@ -38,13 +38,6 @@ module.exports = function (router, globalScope) {
                     }
                     const response = {};
                     const result = await module.handler(params, ctx);
-                    if (!result) {
-                        ctx.body = {
-                            ok: true,
-                        };
-                        return next();
-                    }
-                    
                     if (result.pagination) {
                         const { page, count, limit } = result.pagination;
                         const pageCount = Math.ceil(count / limit);

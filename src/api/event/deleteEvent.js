@@ -52,6 +52,7 @@ module.exports = {
             );
         }
 
-        return Promise.all(asyncNotify);
+        await Promise.all(asyncNotify);
+        return {};
     },
 };
