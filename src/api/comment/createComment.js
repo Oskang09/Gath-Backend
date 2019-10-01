@@ -16,7 +16,7 @@ module.exports = {
         });
 
         const asyncNotify = [
-            await comment.create({
+            comment.create({
                 comment: params.comment,
                 userId: ctx.state.user.id,
                 eventId: params.id,
@@ -25,7 +25,7 @@ module.exports = {
 
         for (const eventUser of eventUsers) {
             if (eventUser.user.id === ctx.state.user.id) {
-                return;
+                break;
             }
             asyncNotify.push(
                 this.pushNotification({
@@ -40,7 +40,6 @@ module.exports = {
             );
         }
 
-        await Promise.all(asyncNotify);
-        return {};
+        return Promise.all(asyncNotify);
     },
 };
