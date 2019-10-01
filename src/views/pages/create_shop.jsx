@@ -9,7 +9,7 @@ function Component(props) {
                 <h1>Created New Shop</h1>
                 <p>ID : {shop.id}</p>
                 <p>Name : {shop.name}</p>
-                <p>Location : {shop.locaiton}</p>
+                <p>Location : {shop.location}</p>
                 <p>Image: </p><img src={props.cdn(shop.image)} />
             </div>
         );

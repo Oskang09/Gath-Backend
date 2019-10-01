@@ -15,14 +15,6 @@ module.exports = function(router, globalScope) {
         const view = ctx.params['0'] || 'index';
         const data = {};
 
-        const apis = ctx.query._apis;
-        if (apis) {
-            const apiList = apis.includes(',') ? apis.split(',') : [ apis ];
-            for (const apiName of apiList) {
-                data[apiName] = await globalScope.api[apiName](ctx.query);
-            }
-        }
-
         const accessToken = ctx.cookies.get('gath-admin');
         if (accessToken) {
             if (view === 'logout') {
@@ -30,6 +22,14 @@ module.exports = function(router, globalScope) {
                 return ctx.redirect('/web/login');
             }
             ctx.state.user = await globalScope.api.getAdmin({ token: accessToken });
+        }
+
+        const apis = ctx.query._apis;
+        if (apis) {
+            const apiList = apis.includes(',') ? apis.split(',') : [ apis ];
+            for (const apiName of apiList) {
+                data[apiName] = await globalScope.api[apiName](ctx.query, ctx);
+            }
         }
 
         if (view === 'login' && ctx.state.user) {
