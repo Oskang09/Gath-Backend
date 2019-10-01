@@ -40,7 +40,6 @@ module.exports = {
             );
         }
 
-        await Promise.all(asyncNotify);
-        return {};
+        return Promise.all(asyncNotify);
     },
 };
