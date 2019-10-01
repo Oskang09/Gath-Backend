@@ -6,7 +6,7 @@ module.exports = {
     method: 'PUT',
     before: [ 'verifyToken' ],
     handler: async function(params) {
-        const { event, event_user, user } = this.sequelizeModels;
+        const { event, event_user, user, notification } = this.sequelizeModels;
         const instance = await event.findByPk(params.id);
         if (!instance) {
             throw "MISSING_INSTANCE";
