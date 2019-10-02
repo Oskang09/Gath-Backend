@@ -23,7 +23,7 @@ module.exports = {
 
         if (params[0].banner) {
             if (instance.image) {
-                await this.cdn.remove(instance.image);
+                this.cdn.remove(instance.image);
             }
             Object.assign(body, { image: await this.cdn.upload(params[0].banner) });
         }
@@ -35,9 +35,7 @@ module.exports = {
             include: [ user ],
             select: [ 'userId' ],
         });
-        const asyncNotify = [
-            instance.update(body)
-        ];
+        const asyncNotify = [];
         for (const eventUser of eventUsers) {
             asyncNotify.push(
                 notification.create({
@@ -58,6 +56,7 @@ module.exports = {
             );
         }
 
-        return Promise.all(asyncNotify);
+        Promise.all(asyncNotify);
+        return instance.update(body);
     },
 };
