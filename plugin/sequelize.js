@@ -22,5 +22,5 @@ module.exports = function (setting, globalScope) {
     globalScope.sequelize = sequelize;
     globalScope.sequelizeModels = models;    
     globalScope.tsql = (tfn) => sequelize.transaction(tfn);
-    sequelize.sync();
+    sequelize.sync({ alter: true });
 };
