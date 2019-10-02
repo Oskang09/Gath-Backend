@@ -13,7 +13,10 @@ module.exports = {
         const offset = ( page - 1 ) * limit;
         const where = {
             status: {
-                [Op.not]: 'END'
+                [Op.not]: [
+                    'END',
+                    'START'
+                ]
             }
         };
 
