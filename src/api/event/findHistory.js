@@ -24,6 +24,9 @@ module.exports = {
             limit,
             offset,
             where,
+            order: [
+                [ 'createdAt', 'DESC' ]
+            ],
             raw: true
         });
         return {
