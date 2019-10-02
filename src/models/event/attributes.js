@@ -23,4 +23,5 @@ module.exports = {
      * END - Event ended
      */
     status: Sequelize.STRING,
+    deletedAt: Sequelize.DATE,
 };
