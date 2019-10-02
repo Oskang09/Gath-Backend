@@ -13,7 +13,7 @@ module.exports = {
         const offset = ( page - 1 ) * limit;
         const { rows, count } = await notification.findAndCountAll({
             limit, offset,
-            include: [ { model: event, paranoid: true } ],
+            include: [ { model: event, paranoid: false } ],
             order: [
                 [ 'id', 'DESC' ]
             ],
