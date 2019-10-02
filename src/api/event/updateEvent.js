@@ -35,28 +35,31 @@ module.exports = {
             include: [ user ],
             select: [ 'userId' ],
         });
-        const asyncNotify = [
-            instance.update(body)
-        ];
-        for (const eventUser of eventUsers) {
-            asyncNotify.push(
-                notification.create({
-                    action: 'VIEW_EVENT',
-                    eventId: params.id,
-                    about: `Event owner of ${instance.name} have updated event information.`,
-                    userId: eventUser.userId,
-                }, { transaction }),
-                this.pushNotification({
-                    target: eventUser.user.device_token,
-                    data: {
-                        action: 'VIEW_EVENT',
-                        event: params.id.toString(),
-                    },
-                    title: `Event Information`,
-                    body: `Event owner of ${instance.name} have updated event information.`
-                })
-            );
-        }
-        return Promise.all(asyncNotify);
+
+        return this.sequelize.tsql(
+            (transaction) => {
+                const asyncNotify = [ instance.update(body, { transaction }) ];
+                for (const eventUser of eventUsers) {
+                    asyncNotify.push(
+                        notification.create({
+                            action: 'VIEW_EVENT',
+                            eventId: params.id,
+                            about: `Event owner of ${instance.name} have updated event information.`,
+                            userId: eventUser.userId,
+                        }, { transaction }),
+                        this.pushNotification({
+                            target: eventUser.user.device_token,
+                            data: {
+                                action: 'VIEW_EVENT',
+                                event: params.id.toString(),
+                            },
+                            title: `Event Information`,
+                            body: `Event owner of ${instance.name} have updated event information.`
+                        })
+                    );
+                }
+                return Promise.all(asyncNotify);
+            }
+        );
     },
 };

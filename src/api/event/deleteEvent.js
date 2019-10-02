@@ -31,27 +31,32 @@ module.exports = {
             include: [ user ],
             select: [ 'userId' ],
         });
-        const asyncNotify = [ instance.destroy() ];
-        for (const eventUser of eventUsers) {
-            asyncNotify.push(
-                notification.create({
-                    action: 'NONE',
-                    eventId: params.id,
-                    about: `Event ${instance.name} have been deleted.`,
-                    userId: eventUser.userId,
-                }, { transaction }),
-                this.pushNotification({
-                    target: eventUser.user.device_token,
-                    data: {
-                        action: 'NONE',
-                        event: params.id.toString(),
-                    },
-                    title: `Event Information`,
-                    body: `Event ${instance.name} have been deleted.`
-                })
-            );
-        }
 
-        return Promise.all(asyncNotify);
+        return this.sequelize.tsql(
+            (transaction) => {
+                const asyncNotify = [ instance.destroy({ transaction }) ];
+                for (const eventUser of eventUsers) {
+                    asyncNotify.push(
+                        notification.create({
+                            action: 'NONE',
+                            eventId: params.id,
+                            about: `Event ${instance.name} have been deleted.`,
+                            userId: eventUser.userId,
+                        }, { transaction }),
+                        this.pushNotification({
+                            target: eventUser.user.device_token,
+                            data: {
+                                action: 'NONE',
+                                event: params.id.toString(),
+                            },
+                            title: `Event Information`,
+                            body: `Event ${instance.name} have been deleted.`
+                        })
+                    );
+                }
+        
+                return Promise.all(asyncNotify);
+            }
+        );
     },
 };
