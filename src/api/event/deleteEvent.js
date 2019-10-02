@@ -37,7 +37,7 @@ module.exports = {
                 notification.create({
                     action: 'NONE',
                     eventId: params.id,
-                    about: `Event ${eventRes.name} have been deleted.`,
+                    about: `Event ${instance.name} have been deleted.`,
                     userId: eventUser.userId,
                 }, { transaction }),
                 this.pushNotification({
@@ -47,7 +47,7 @@ module.exports = {
                         event: params.id.toString(),
                     },
                     title: `Event Information`,
-                    body: `Event ${eventRes.name} have been deleted.`
+                    body: `Event ${instance.name} have been deleted.`
                 })
             );
         }

@@ -35,13 +35,15 @@ module.exports = {
             include: [ user ],
             select: [ 'userId' ],
         });
-        const asyncNotify = [];
+        const asyncNotify = [
+            instance.update(body)
+        ];
         for (const eventUser of eventUsers) {
             asyncNotify.push(
                 notification.create({
                     action: 'VIEW_EVENT',
                     eventId: params.id,
-                    about: `Event owner of ${eventRes.name} have updated event information.`,
+                    about: `Event owner of ${instance.name} have updated event information.`,
                     userId: eventUser.userId,
                 }, { transaction }),
                 this.pushNotification({
@@ -51,12 +53,10 @@ module.exports = {
                         event: params.id.toString(),
                     },
                     title: `Event Information`,
-                    body: `Event owner of ${eventRes.name} have updated event information.`
+                    body: `Event owner of ${instance.name} have updated event information.`
                 })
             );
         }
-
-        Promise.all(asyncNotify);
-        return instance.update(body);
+        return Promise.all(asyncNotify);
     },
 };
