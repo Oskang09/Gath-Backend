@@ -14,6 +14,9 @@ module.exports = {
         const { rows, count } = await notification.findAndCountAll({
             limit, offset,
             include: [ event ],
+            order: [
+                [ 'id', 'DESC' ]
+            ],
             where: { userId },
         });
 
