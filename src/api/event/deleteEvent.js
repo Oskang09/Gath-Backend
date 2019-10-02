@@ -32,7 +32,7 @@ module.exports = {
             select: [ 'userId' ],
         });
 
-        return this.sequelize.tsql(
+        return this.tsql(
             (transaction) => {
                 const asyncNotify = [ instance.destroy({ transaction }) ];
                 for (const eventUser of eventUsers) {

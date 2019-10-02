@@ -36,7 +36,7 @@ module.exports = {
             select: [ 'userId' ],
         });
 
-        return this.sequelize.tsql(
+        return this.tsql(
             (transaction) => {
                 const asyncNotify = [ instance.update(body, { transaction }) ];
                 for (const eventUser of eventUsers) {
