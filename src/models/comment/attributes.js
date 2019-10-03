@@ -9,7 +9,7 @@ module.exports = {
     comment: Sequelize.STRING,
     createdAt: {
         type: Sequelize.DATE,
-        defaultValue: Date.now(),
+        defaultValue: Sequelize.fn('NOW'),
     },
     eventId: {
         type: Sequelize.INTEGER,
