@@ -25,7 +25,7 @@ module.exports = {
             offset,
             where,
             order: [
-                [ 'id', 'DESC' ]
+                [ 'updatedAt', 'DESC' ]
             ],
             raw: true
         });

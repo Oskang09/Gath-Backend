@@ -15,7 +15,6 @@ module.exports = {
      * NONE - just a useless message
      */
     action: Sequelize.STRING,
-
     about: Sequelize.STRING,
     eventId: {
         type: Sequelize.INTEGER,

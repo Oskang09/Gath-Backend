@@ -15,7 +15,7 @@ module.exports = {
             limit, offset,
             include: [ { model: event, paranoid: false } ],
             order: [
-                [ 'id', 'DESC' ]
+                [ 'createdAt', 'DESC' ]
             ],
             where: { userId },
         });
