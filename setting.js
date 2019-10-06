@@ -12,8 +12,8 @@ module.exports = {
     },
     sequelize: {
         // url: process.env.DATABASE_URL,
-        url: 'postgresql://postgres:oskang09@127.0.0.1:5432/gath',
-        // url: 'postgres://nkgeeaxludrqgq:f231a947b467d64c46fa4fd688a393bd64d809fdee290d406d3ecf8c4bed877c@ec2-54-235-100-99.compute-1.amazonaws.com:5432/d489ilhado36jm',
+        // url: 'postgresql://postgres:oskang09@127.0.0.1:5432/gath',
+        url: 'postgres://nkgeeaxludrqgq:f231a947b467d64c46fa4fd688a393bd64d809fdee290d406d3ecf8c4bed877c@ec2-54-235-100-99.compute-1.amazonaws.com:5432/d489ilhado36jm',
         options: {
             timestamps: false,
             logging: false,
