@@ -32,7 +32,7 @@ module.exports = {
         }
 
         const { event } = this.sequelizeModels;
-        const { count, rows } = await event.findAndCountAll({ limit, offset, where });
+        const { count, rows } = await event.findAndCountAll({ limit, offset, where, order: [ [ 'createdAt', 'DESC' ] ] });
         
         return {
             pagination: { page, count, limit },

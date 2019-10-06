@@ -20,6 +20,9 @@ module.exports = {
         const { post, shop } = this.sequelizeModels;
         const { count, rows } = await post.findAndCountAll({
             include: [ shop ],
+            order:[
+                [ 'createdAt', 'DESC ']
+            ],
             limit, offset, where
         });
 
