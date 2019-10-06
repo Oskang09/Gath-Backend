@@ -38,7 +38,6 @@ module.exports = {
     messages: {
         INVALID_JSON_BODY: `Incoming data isn't 'application/json'.`,
         MISSING_HEADER_TOKEN: `Header 'gath-token' is required.`,
-        EXPIRED_VOUCHER: 'Voucher have been expired.',
         MISSING_EVENT: `Event doesn't exists.`,
         NOT_EVENT_OWNER: `You aren't event owner of the event.`,
         MISSING_USER_PARAM: 'Missing target user parameters.',
@@ -50,6 +49,10 @@ module.exports = {
         MISSING_INSTANCE: 'Missing target instance.',
         ALREADY_COMMENT: `You already review the user.`,
         UTAG_UNIQUE_VIOLATION: 'Your alias have been used by another user, please choose another.',
-        USED_VOUCHER: 'Voucher already used.'
+        USED_VOUCHER: 'Voucher already used.',
+        EXPIRED_VOUCHER: 'Voucher have been expired.',
+        EMPTY_VOUCHER: 'Voucher already empty.',
+        RECEIVED_VOUCHER: 'You already recevied this voucher.',
+        NOT_ACQUIRED_VOUCHER: `You doesn't have this voucher.`,
     },
 };
