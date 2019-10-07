@@ -24,9 +24,6 @@ module.exports = {
             limit,
             offset,
             where,
-            order: [
-                [ 'updatedAt', 'DESC' ]
-            ],
             raw: true
         });
         return {
