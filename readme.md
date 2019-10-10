@@ -1,22 +1,17 @@
-# Installation
+# Testing Feature
 
-```
-$ git clone
-$ npm i
-```
+* MVC Admin [ Doesn't achive my expectation ]
 
-# Starting
 
-```
-$ npm run dev ( for development mode )
-$ npm start
-```
+# Library
 
-# Environment
+* moment ( DateTime )
+* sequelize ( Orm )
+* postgres
+* react ( Admin )
+* Koa ( http core )
+* firebase-admin ( integrate firebase )
 
-```
-DATABASE_URL=database_connection_string
-GMAIL_USER=username
-GMAIL_PASS=password
-PORT=3000
-```
+# Contributors
+
+* [Oskang09](https://github.com/Oskang09)

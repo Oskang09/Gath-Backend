@@ -1,0 +1,103 @@
+Latest UAT
+
+> Splash Screen
+
+> Register wtih Phone Number ( 0187824152 / 187824152 are valid )
+> Invalid Phone Number ( Error Dialog )
+> Invalid Verify Code ( Error Dialog )
+> [NEXT] Register / Login
+
+* Register ( New Account ) [ If user doesn't input Introduction will be require do again this flow when relogin ]
+> User Detail Error ( Empty name, age, alias )
+> User Detail [NEXT] ( Update profile )
+> Personality Error ( Maximum 5 chosen )
+> Personality [NEXT] ( Update Profile )
+> Introduction Error ( Empty )
+> Introduction [NEXT] ( Update Profile )
+
+* Login ( Old Account )
+> Home Page ( Bottom Navigation Bar )
+
+> Post List ( Filter, Search by Name )
+> Post Detail
+> Post Detail Error ( EMPTY_VOUCHER, EXPIRED_VOUCHER, RECEIVED_VOUCHER )
+> Post Detail Receive Voucher ( Alert before receive )
+
+> Event List ( Filter, Search by Name )
+> My Events & Other Events
+
+> CreateEvent
+> CreateEvent Error ( Empty Name & Future start_time, emtpy description )
+> Shop List ( Filter & Search by Name )
+> ShopList ( Custom / Any shop )
+> ShopList display selected shop
+> CreateEvent Alert
+> Go EventDetail
+
+> Event Detail
+> Event Detail for Other User ( Request, Quit, Check In )
+> Event Detail for Owner ( Start, End )
+> Push NOtification & Notification
+> Event User ( User profile view )
+> Event User for Owner ( Accept, Kick, Reject )
+> Event Comment ( First must be event description )
+> Event Edit ( Same flow with create )
+> Delete Event ( Alert )
+> Event List dissapear
+
+> Profile Page ( Review,  Description, Edit, Logout )
+> ProfileBar ( Voucher, Notification, Event History )
+
+> Voucher List
+> Voucher ( Expired / Used )
+> Voucher Alert before ( activate )
+> Voucher Detail
+
+> Event History
+> Event Detail ( View Comments & Peoples only )
+
+> Notification 
+> View Event notification
+> Review Event notification
+
+
+==================================================================
+
+FINE TUNE / Missing
+
+* Splash Loading
+* Shop & Location pop up dialog ( when creating )
+
+Copy Writing
+* REQUEST_EVENT ( owner receive )
+[DONE] Kick & Reject
+* QUIT
+* START_EVENT
+[DONE] END_EVENT ( Review )
+
+-- UI
+* Request Join
+* Quit Event
+* Start Event
+* Check In ( should remove alert )
+* End Event
+* Create Event
+[DONE] Receive voucher
+[DONE] Activate voucher
+
+==================================================================
+
+Pending
+
+[DONE] not found handler -> redirect to /web/
+[DONE] event listing ( issues )
+[DONE] comment sorting DESC
+[DONE] update event, delete event ( push notify )
+[DONE] User Avatar ( Review )
+[DONE] Completed Views text centeralize
+[DONE] My Events dissapear when empty
+[DONE] EDIT & UPDATE text condition on button  access
+[DONE] Create comment ( push notification )
+
+* Splash Screen
+* Voucher received button
